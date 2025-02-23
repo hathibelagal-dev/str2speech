@@ -4,7 +4,7 @@
 `str2speech` is a simple command-line tool for converting text to speech using Transformer-based text-to-speech (TTS) models. It supports multiple models and voice presets, allowing users to generate high-quality speech audio from text.
 
 ## Features
-- Supports multiple TTS models, including `suno/bark-small`, `suno/bark`, and `facebook/mms-1b-all`.
+- Supports multiple TTS models, including `suno/bark-small`, `suno/bark`, and `facebook/mms-tts-eng`.
 - Allows selection of voice presets.
 - Outputs speech in `.wav` format.
 - Works with both CPU and GPU.
@@ -15,12 +15,6 @@ To install `str2speech`, first make sure you have `pip` installed, then run:
 
 ```sh
 pip install str2speech
-```
-
-You may also need additional dependencies, such as `transformers`, `torch`, and `scipy`. If required, install them using:
-
-```sh
-pip install transformers torch scipy
 ```
 
 ## Usage
@@ -59,7 +53,11 @@ speaker.text_to_speech("Hello, this is a test.", "test.wav")
 The following models are supported:
 - `suno/bark-small` (default)
 - `suno/bark`
-- `facebook/mms-1b-all`
+- `facebook/mms-tts-eng`
+- `facebook/mms-tts-deu`
+- `facebook/mms-tts-fra`
+- `facebook/mms-tts-spa`
+- `facebook/mms-tts-hin`
 
 ## Dependencies
 - `transformers`
