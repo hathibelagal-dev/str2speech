@@ -20,7 +20,7 @@ def main():
     parser.add_argument(
         "--voice",
         "-v",
-        help="The voice to use. If not provided, the default voice will be used.",
+        help="The voice to use for the Bark model. If not provided, the default voice will be used.",
     )
     parser.add_argument(
         "--output",
@@ -50,7 +50,7 @@ def main():
     try:
         start_time = time.time()
         s = speaker.Speaker(args.model)
-        s.text_to_speech(text, output)
+        s.text_to_speech(text, output, args.voice)
         end_time = time.time()
         print(f"Generated speech in {end_time - start_time:.2f} seconds.")
         print(f"Output saved to {output}.")

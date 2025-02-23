@@ -4,8 +4,9 @@
 `str2speech` is a simple command-line tool for converting text to speech using Transformer-based text-to-speech (TTS) models. It supports multiple models and voice presets, allowing users to generate high-quality speech audio from text.
 
 ## Features
-- Supports multiple TTS models, including `suno/bark-small`, `suno/bark`, and `facebook/mms-tts-eng`.
+- Supports multiple TTS models, including `suno/bark-small`, `suno/bark`, and various `facebook/mms-tts` models.
 - Allows selection of voice presets.
+- Supports text input via command-line arguments or files.
 - Outputs speech in `.wav` format.
 - Works with both CPU and GPU.
 
@@ -23,18 +24,19 @@ pip install str2speech
 Run the script via the command line:
 
 ```sh
-python -m str2speech.main --text "Hello, world!" --output hello.wav
+str2speech --text "Hello, world!" --output hello.wav
 ```
 
 ### Options
-- `--text` (`-t`): The text to convert to speech (required).
+- `--text` (`-t`): The text to convert to speech.
+- `--file` (`-f`): A file containing text to convert to speech.
 - `--voice` (`-v`): The voice preset to use (optional, defaults to a predefined voice).
 - `--output` (`-o`): The output `.wav` file name (optional, defaults to `output.wav`).
 - `--model` (`-m`): The TTS model to use (optional, defaults to `suno/bark-small`).
 
 Example:
 ```sh
-python -m str2speech.main -t "This is an AI-generated voice." -o speech.wav -m suno/bark
+str2speech --file input.txt --output speech.wav --model suno/bark
 ```
 
 ## API Usage
@@ -57,7 +59,6 @@ The following models are supported:
 - `facebook/mms-tts-deu`
 - `facebook/mms-tts-fra`
 - `facebook/mms-tts-spa`
-- `facebook/mms-tts-hin`
 
 ## Dependencies
 - `transformers`
@@ -65,5 +66,4 @@ The following models are supported:
 - `scipy`
 
 ## License
-This project is licensed under the GNU General Public License V3.
-
+This project is licensed under the GNU General Public License v3 (GPLv3).

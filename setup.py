@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 setup(
     name="str2speech",
-    version="0.1.2",
+    version="0.1.3",
     author="Ashraff Hathibelagal",
     description="A tool/library to quickly turn text to speech.",
     long_description=long_description,
@@ -20,6 +20,7 @@ setup(
         "torchvision",
         "torchaudio",
         "scipy",
+        "accelerate"
     ],
     entry_points={
         "console_scripts": [
