@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setup(
     name='str2speech',
-    version='0.1.0',
+    version='0.1.1',
     author='Ashraff Hathibelagal',
     description='A tool/library to quickly turn text to speech.',
     long_description=long_description,

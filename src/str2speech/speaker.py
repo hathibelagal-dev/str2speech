@@ -13,16 +13,13 @@ class Speaker:
         self.processor = AutoProcessor.from_pretrained(tts_model["name"])
 
         if self.tts_model["type"] == 0:
-            self.model = BarkModel.from_pretrained(tts_model["name"])
+            self.model = BarkModel.from_pretrained(tts_model["name"]).to(self.device)
             self.sample_rate = self.model.generation_config.sample_rate
 
     def list_voices(self):
         return self.processor.model.config.voice_presets
 
     def text_to_speech(self, text: str, output_file: str, voice_preset: str = None):
-        if not output_file:
-            output_file = "output.wav"
-
         if not voice_preset:
             if self.tts_model["type"] == 0:
                 voice_preset = "v2/en_speaker_6"
