@@ -27,8 +27,8 @@ class Speaker:
 
         inputs = self.processor(text, voice_preset=voice_preset, return_tensors="pt")
         audio_array = self.model.generate(
-            input_ids=inputs["input_ids"],
-            attention_mask=inputs["attention_mask"],
+            input_ids=inputs["input_ids"].to(self.device),
+            attention_mask=inputs["attention_mask"].to(self.device),
             pad_token_id=self.processor.tokenizer.pad_token_id,
         )
         audio_array = audio_array.cpu().numpy().squeeze()
