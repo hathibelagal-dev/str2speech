@@ -7,7 +7,7 @@ setup(
     name="str2speech",
     version="0.1.4",
     author="Ashraff Hathibelagal",
-    description="A powerful, Transformer-based text-to-speech tool.",
+    description="A powerful, Transformer-based text-to-speech (TTS) tool.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/hathibelagal-dev/str2speech",
