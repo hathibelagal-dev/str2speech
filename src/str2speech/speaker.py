@@ -1,8 +1,9 @@
 from transformers import AutoProcessor, BarkModel
 from transformers import VitsTokenizer, VitsModel
+
 import scipy.io.wavfile as wav
 import torch
-
+import sys
 
 class Speaker:
     def __init__(self, tts_model: str = None):
@@ -14,7 +15,8 @@ class Speaker:
 
         self.tts_model = tts_model
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        self.processor = AutoProcessor.from_pretrained(tts_model)
+        if "Zonos" not in tts_model:
+            self.processor = AutoProcessor.from_pretrained(tts_model)
 
         if "bark" in tts_model:
             self.model = BarkModel.from_pretrained(tts_model).to(self.device)
@@ -25,6 +27,14 @@ class Speaker:
             self.model = VitsModel.from_pretrained(tts_model).to(self.device)
             self.tokenizer = VitsTokenizer.from_pretrained(tts_model)
             self.sample_rate = 16000
+        elif "zonos" in tts_model.lower():
+            try:
+                from zonos.model import Zonos                
+                self.model = Zonos.from_pretrained(tts_model, device=self.device)
+                self.sample_rate = getattr(self.model.autoencoder, "sampling_rate", 44100)
+            except ImportError:
+                print("Note: Zonos model requires the zonos package.")                
+                sys.exit(1)            
 
     def text_to_speech(self, text: str, output_file: str, voice_preset: str = None):
         if "bark" in self.tts_model:
@@ -46,6 +56,13 @@ class Speaker:
             with torch.no_grad():
                 outputs = self.model(**inputs)
                 audio_array = outputs.waveform[0]
+        elif "zonos" in self.tts_model.lower():
+            from zonos.conditioning import make_cond_dict
+            cond_dict = make_cond_dict(text=text, language="en-us")
+            conditioning = self.model.prepare_conditioning(cond_dict)
+            with torch.no_grad():
+                codes = self.model.generate(conditioning)
+                audio_array = self.model.autoencoder.decode(codes).cpu()[0]
 
         if audio_array is not None:
             audio_array = audio_array.cpu().numpy().squeeze()
@@ -63,5 +80,5 @@ class Speaker:
             {"name": "facebook/mms-tts-deu"},
             {"name": "facebook/mms-tts-fra"},
             {"name": "facebook/mms-tts-spa"},
-            {"name": "facebook/mms-tts-hin"},
+            {"name": "Zyphra/Zonos-v0.1-transformer"}
         ]
