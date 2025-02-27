@@ -3,6 +3,24 @@
 ## Overview
 `str2speech` is a simple command-line tool for converting text to speech using Transformer-based text-to-speech (TTS) models. It supports multiple models and voice presets, allowing users to generate high-quality speech audio from text.
 
+## Latest
+
+Added support for Zyphra Zonos. Just try this out:
+
+```
+from str2speech.speaker import Speaker
+
+speaker = Speaker("Zyphra/Zonos-v0.1-transformer")
+speaker.text_to_speech("Hello, this is a test!", "output.wav")
+```
+
+This expects you to have Zonos installed. If you don't have it yet, run the following:
+```
+!apt install espeak-ng
+!git clone https://github.com/Zyphra/Zonos.git
+!cd Zonos && pip install -e .
+```
+
 ## Features
 - Supports multiple TTS models, including `suno/bark-small`, `suno/bark`, and various `facebook/mms-tts` models.
 - Allows selection of voice presets.
@@ -59,11 +77,13 @@ The following models are supported:
 - `facebook/mms-tts-deu`
 - `facebook/mms-tts-fra`
 - `facebook/mms-tts-spa`
+- `Zyphra/Zonos-v0.1-transformer`
 
-## Dependencies
-- `transformers`
-- `torch`
-- `scipy`
+## Tested With These Dependencies
+- `transformers==4.49.0`
+- `torch==2.5.1+cu124`
+- `numpy==2.2.3`
+- `scipy==1.13.1`
 
 ## License
 This project is licensed under the GNU General Public License v3 (GPLv3).
