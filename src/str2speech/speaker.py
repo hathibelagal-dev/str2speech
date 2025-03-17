@@ -14,9 +14,9 @@ class Speaker:
             tts_model = Speaker.list_models()[0]["name"]
             print("Choosing default model: " + tts_model)
 
-        self.tts_model = tts_model
+        self.tts_model = tts_model.lower()
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        if "Zonos" not in tts_model and "Kokoro" not in tts_model:
+        if "zonos" not in tts_model and "kokoro" not in tts_model:
             self.processor = AutoProcessor.from_pretrained(tts_model)
         if "bark" in tts_model:
             self.model = BarkModel.from_pretrained(tts_model).to(self.device)
@@ -59,14 +59,14 @@ class Speaker:
             with torch.no_grad():
                 outputs = self.model(**inputs)
                 audio_array = outputs.waveform[0]
-        elif "zonos" in self.tts_model.lower():
+        elif "zonos" in self.tts_model:
             from zonos.conditioning import make_cond_dict
             cond_dict = make_cond_dict(text=text, language="en-us")
             conditioning = self.model.prepare_conditioning(cond_dict)
             with torch.no_grad():
                 codes = self.model.generate(conditioning)
                 audio_array = self.model.autoencoder.decode(codes).cpu()[0]
-        elif "kokoro" in self.tts_model.lower():
+        elif "kokoro" in self.tts_model:
             if voice_preset:
                 self.model.voice = voice_preset
             self.model.generate(text, output_file)
@@ -78,7 +78,7 @@ class Speaker:
                 wav.write(f, self.sample_rate, audio_array)
                 print("Audio saved.")
         else:
-            if "kokoro" not in self.tts_model.lower():
+            if "kokoro" not in self.tts_model:
                 print("ERROR: Couldn't generate speech.")
 
     @staticmethod
@@ -91,5 +91,5 @@ class Speaker:
             {"name": "facebook/mms-tts-fra"},
             {"name": "facebook/mms-tts-spa"},
             {"name": "kokoro"},
-            {"name": "Zyphra/Zonos-v0.1-transformer"}
+            {"name": "zyphra/zonos-v0.1-transformer"}
         ]

@@ -78,6 +78,7 @@ The following models are supported:
 - `facebook/mms-tts-fra`
 - `facebook/mms-tts-spa`
 - `Zyphra/Zonos-v0.1-transformer`
+- `Kokoro`
 
 ## Tested With These Dependencies
 - `transformers==4.49.0`
