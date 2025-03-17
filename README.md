@@ -5,6 +5,16 @@
 
 ## Latest
 
+Added support for Kokoro-82M. Just try this out:
+
+```
+str2speech --text "Hello again" --model "kokoro"
+```
+
+This is probably the easiest way to use the model.
+
+---
+
 Added support for Zyphra Zonos. Just try this out:
 
 ```
