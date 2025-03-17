@@ -37,9 +37,8 @@ class Speaker:
             except ImportError:
                 print("Note: Zonos model requires the zonos package.")
                 Cloner.clone_and_install("https://github.com/hathibelagal-dev/Zonos.git")
-                from zonos.model import Zonos                
-                self.model = Zonos.from_pretrained(tts_model, device=self.device)
-                self.sample_rate = getattr(self.model.autoencoder, "sampling_rate", 44100)
+                print("Please re-run str2speech for the Zonos model to work.")
+                sys.exit(0)
         elif "kokoro" in tts_model:
             self.model = KokoroTTS()
             self.sample_rate = 24000
