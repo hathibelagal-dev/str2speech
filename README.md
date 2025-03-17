@@ -5,6 +5,17 @@
 
 ## Latest
 
+Added support for Sesame CSM-1B. Here's how to use it:
+
+```bash
+export HF_TOKEN=<your huggingface token>
+str2speech --text "Hello from Sesame" --model "sesame/csm-1b"
+```
+
+Note that this model needs a GPU to run.
+
+---
+
 Added support for Kokoro-82M. Just try this out:
 
 ```bash
@@ -101,6 +112,7 @@ The following models are supported:
 - `facebook/mms-tts-spa`
 - `Zyphra/Zonos-v0.1-transformer`
 - `Kokoro`
+- `Sesame/CSM-1B`
 
 ## Tested With These Dependencies
 - `transformers==4.49.0`

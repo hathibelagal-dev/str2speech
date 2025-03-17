@@ -30,7 +30,6 @@ setup(
         "torchtune",
         "torchao",
         "huggingface_hub",
-        "silentcipher @ git+https://github.com/SesameAILabs/silentcipher@master"
     ],
     entry_points={
         "console_scripts": [
