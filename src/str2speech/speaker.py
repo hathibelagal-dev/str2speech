@@ -4,6 +4,7 @@ from transformers import VitsTokenizer, VitsModel
 import scipy.io.wavfile as wav
 import torch
 import sys
+from .kokoro_tts import KokoroTTS
 
 class Speaker:
     def __init__(self, tts_model: str = None):
@@ -15,9 +16,8 @@ class Speaker:
 
         self.tts_model = tts_model
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        if "Zonos" not in tts_model:
+        if "Zonos" not in tts_model and "Kokoro" not in tts_model:
             self.processor = AutoProcessor.from_pretrained(tts_model)
-
         if "bark" in tts_model:
             self.model = BarkModel.from_pretrained(tts_model).to(self.device)
             if self.device != "cpu":
@@ -34,7 +34,10 @@ class Speaker:
                 self.sample_rate = getattr(self.model.autoencoder, "sampling_rate", 44100)
             except ImportError:
                 print("Note: Zonos model requires the zonos package.")                
-                sys.exit(1)            
+                sys.exit(1)
+        elif "kokoro" in tts_model.lower():
+            self.model = KokoroTTS()
+            self.sample_rate = 24000
 
     def text_to_speech(self, text: str, output_file: str, voice_preset: str = None):
         if "bark" in self.tts_model:
@@ -63,13 +66,20 @@ class Speaker:
             with torch.no_grad():
                 codes = self.model.generate(conditioning)
                 audio_array = self.model.autoencoder.decode(codes).cpu()[0]
+        elif "kokoro" in self.tts_model.lower():
+            if voice_preset:
+                self.model.voice = voice_preset
+            self.model.generate(text, output_file)
+            print("Audio saved.")
 
         if audio_array is not None:
             audio_array = audio_array.cpu().numpy().squeeze()
             with open(output_file, "wb") as f:
                 wav.write(f, self.sample_rate, audio_array)
+                print("Audio saved.")
         else:
-            print("ERROR: Couldn't generate speech.")
+            if "kokoro" not in self.tts_model.lower():
+                print("ERROR: Couldn't generate speech.")
 
     @staticmethod
     def list_models():
@@ -80,5 +90,6 @@ class Speaker:
             {"name": "facebook/mms-tts-deu"},
             {"name": "facebook/mms-tts-fra"},
             {"name": "facebook/mms-tts-spa"},
+            {"name": "kokoro"},
             {"name": "Zyphra/Zonos-v0.1-transformer"}
         ]
