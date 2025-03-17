@@ -39,8 +39,13 @@ class Speaker:
                 install_zonos = input("Do you want to install it now? (y/n)")
                 if install_zonos.lower() == "y":
                     Cloner.clone_and_install("https://github.com/hathibelagal-dev/Zonos.git")
-                    print("Please re-run str2speech so that it can use Zonos.")
-                    sys.exit(0)
+                    try:
+                        from zonos.model import Zonos                
+                        self.model = Zonos.from_pretrained(tts_model, device=self.device)
+                        self.sample_rate = getattr(self.model.autoencoder, "sampling_rate", 44100)
+                    except:
+                        print("Couldn't install/use Zonos.")
+                        sys.exit(1)
                 else:
                     sys.exit(1)
         elif "kokoro" in tts_model.lower():
