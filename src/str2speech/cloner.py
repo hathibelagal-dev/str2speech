@@ -16,7 +16,7 @@ class Cloner:
             subprocess.run(['git', 'clone', repo_url], check=True)
             os.chdir(repo_name)
             print("Installing repository...")
-            subprocess.run(['pip3', 'install', '.'], check=True)
+            subprocess.run(['pip3', 'install', '-e', '.'], check=True)
             print("Successfully cloned and installed the repository!")
         except subprocess.CalledProcessError as e:
             print(f"An error occurred: {e}")
