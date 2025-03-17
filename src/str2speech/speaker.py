@@ -71,6 +71,7 @@ class Speaker:
             if voice_preset:
                 self.model.voice = voice_preset
             self.model.generate(text, output_file)
+            audio_array = None
             print("Audio saved.")
 
         if audio_array is not None:
