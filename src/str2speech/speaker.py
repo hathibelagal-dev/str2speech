@@ -8,13 +8,14 @@ from .kokoro_tts import KokoroTTS
 
 class Speaker:
     def __init__(self, tts_model: str = None):
+        tts_model = tts_model.lower()
         if not tts_model or tts_model not in [
             model["name"] for model in Speaker.list_models()
         ]:
             tts_model = Speaker.list_models()[0]["name"]
             print("Choosing default model: " + tts_model)
 
-        self.tts_model = tts_model.lower()
+        self.tts_model = tts_model
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         if "zonos" not in tts_model and "kokoro" not in tts_model:
             self.processor = AutoProcessor.from_pretrained(tts_model)
