@@ -23,7 +23,8 @@ setup(
         "accelerate",
         "numpy==1.26.4",
         "kokoro>=0.8.4",
-        "soundfile"
+        "soundfile",
+        "GitPython"
     ],
     entry_points={
         "console_scripts": [
