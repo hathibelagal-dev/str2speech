@@ -6,6 +6,7 @@ import torch
 import sys
 from .kokoro_tts import KokoroTTS
 from .cloner import Cloner
+from .sesame_tts import SesameTTS
 
 class Speaker:
     def __init__(self, tts_model: str = None):
@@ -18,7 +19,7 @@ class Speaker:
 
         self.tts_model = tts_model
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        if "zonos" not in tts_model and "kokoro" not in tts_model:
+        if "zonos" not in tts_model and "kokoro" not in tts_model and "sesame" not in tts_model:
             self.processor = AutoProcessor.from_pretrained(tts_model)
         if "bark" in tts_model:
             self.model = BarkModel.from_pretrained(tts_model).to(self.device)
@@ -41,6 +42,9 @@ class Speaker:
                 sys.exit(0)
         elif "kokoro" in tts_model:
             self.model = KokoroTTS()
+            self.sample_rate = 24000
+        elif "sesame" in tts_model:
+            self.model = SesameTTS()
             self.sample_rate = 24000
 
     def text_to_speech(self, text: str, output_file: str, voice_preset: str = None):
@@ -70,10 +74,10 @@ class Speaker:
             with torch.no_grad():
                 codes = self.model.generate(conditioning)
                 audio_array = self.model.autoencoder.decode(codes).cpu()[0]
-        elif "kokoro" in self.tts_model:
+        elif "kokoro" in self.tts_model or "sesame" in self.tts_model:
             if voice_preset:
                 self.model.voice = voice_preset
-            self.model.generate(text, output_file)
+            self.model.generate(text, output_file, self.sample_rate)
             audio_array = None
             print("Audio saved.")
 
@@ -83,7 +87,7 @@ class Speaker:
                 wav.write(f, self.sample_rate, audio_array)
                 print("Audio saved.")
         else:
-            if "kokoro" not in self.tts_model:
+            if "kokoro" not in self.tts_model and "sesame" not in self.tts_model:
                 print("ERROR: Couldn't generate speech.")
 
     @staticmethod
@@ -96,5 +100,6 @@ class Speaker:
             {"name": "facebook/mms-tts-fra"},
             {"name": "facebook/mms-tts-spa"},
             {"name": "kokoro"},
+            {"name": "sesame/csm-1b"},
             {"name": "zyphra/zonos-v0.1-transformer"}
         ]
