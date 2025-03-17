@@ -41,7 +41,6 @@ If you choose to install Zonos yourself, please run the following:
 apt install espeak-ng
 git clone https://github.com/hathibelagal-dev/Zonos.git
 cd Zonos && pip install -e .
-rm -rf Zonos
 ```
 
 ## Features
