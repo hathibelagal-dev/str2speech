@@ -5,6 +5,7 @@ import scipy.io.wavfile as wav
 import torch
 import sys
 from .kokoro_tts import KokoroTTS
+from .cloner import Cloner
 
 class Speaker:
     def __init__(self, tts_model: str = None):
@@ -34,8 +35,14 @@ class Speaker:
                 self.model = Zonos.from_pretrained(tts_model, device=self.device)
                 self.sample_rate = getattr(self.model.autoencoder, "sampling_rate", 44100)
             except ImportError:
-                print("Note: Zonos model requires the zonos package.")                
-                sys.exit(1)
+                print("Note: Zonos model requires the zonos package.")
+                install_zonos = input("Do you want to install it now? (y/n)")
+                if install_zonos.lower() == "y":
+                    Cloner.clone_and_install("https://github.com/hathibelagal-dev/Zonos.git")
+                    print("Please re-run str2speech so that it can use Zonos.")
+                    sys.exit(0)
+                else:
+                    sys.exit(1)
         elif "kokoro" in tts_model.lower():
             self.model = KokoroTTS()
             self.sample_rate = 24000

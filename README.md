@@ -32,13 +32,16 @@ speaker = Speaker("Zyphra/Zonos-v0.1-transformer")
 speaker.text_to_speech("Hello, this is a test!", "output.wav")
 ```
 
-`str2speech` expects you to have Zonos installed on your system already.
-If you don't have it yet, run the following:
+`str2speech` will try to install Zonos if it doesn't detect it
+on your system. You might still have to install `espeak-ng` manually.
+
+If you choose to install Zonos yourself, please run the following:
 
 ```bash
 apt install espeak-ng
 git clone https://github.com/hathibelagal-dev/Zonos.git
 cd Zonos && pip install -e .
+rm -rf Zonos
 ```
 
 ## Features
