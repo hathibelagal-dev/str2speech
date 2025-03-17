@@ -4,8 +4,9 @@ import time
 from transformers import logging
 import str2speech.speaker as speaker
 
+import warnings
+warnings.filterwarnings("ignore")
 logging.set_verbosity_error()
-
 
 def main():
     print(f"Now running str2speech {str2speech.__version__}")
