@@ -1,6 +1,8 @@
 import os
 import git
 from pip._internal.cli.main import main as pip_main
+from .utils import is_colab
+import subprocess
 
 class Cloner:
     @staticmethod
@@ -32,6 +34,18 @@ class Cloner:
                     installation_path = os.path.abspath('.')
                     success = True
                     print("Successfully cloned and installed the repository!")
+
+                    if is_colab():
+                        try:
+                            result = subprocess.run(
+                                ['sudo', 'apt', 'install', 'espeak-ng', '-y'],
+                                check=True,
+                                capture_output=True,
+                                text=True
+                            )
+                            print(result.stdout)
+                        except subprocess.CalledProcessError as e:
+                            pass                                                
                 else:
                     print(f"pip install failed with code {install_result}")
             else:
