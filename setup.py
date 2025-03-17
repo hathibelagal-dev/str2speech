@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 setup(
     name="str2speech",
-    version="0.2.2",
+    version="0.2.3",
     author="Ashraff Hathibelagal",
     description="A powerful, Transformer-based text-to-speech (TTS) tool.",
     long_description=long_description,
@@ -23,7 +23,8 @@ setup(
         "accelerate",
         "numpy==1.26.4",
         "kokoro>=0.8.4",
-        "soundfile"
+        "soundfile",
+        "GitPython"
     ],
     entry_points={
         "console_scripts": [
