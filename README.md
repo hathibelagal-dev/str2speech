@@ -36,9 +36,9 @@ speaker.text_to_speech("Hello, this is a test!", "output.wav")
 If you don't have it yet, run the following:
 
 ```bash
-!apt install espeak-ng
-!git clone https://github.com/Zyphra/Zonos.git
-!cd Zonos && pip install -e .
+apt install espeak-ng
+git clone https://github.com/hathibelagal-dev/Zonos.git
+cd Zonos && pip install -e .
 ```
 
 ## Features
@@ -103,7 +103,7 @@ The following models are supported:
 ## Tested With These Dependencies
 - `transformers==4.49.0`
 - `torch==2.5.1+cu124`
-- `numpy==2.2.3`
+- `numpy==1.26.4`
 - `scipy==1.13.1`
 
 ## License
