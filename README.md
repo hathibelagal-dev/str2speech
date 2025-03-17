@@ -7,7 +7,7 @@
 
 Added support for Kokoro-82M. Just try this out:
 
-```
+```bash
 str2speech --text "Hello again" --model "kokoro"
 ```
 
@@ -17,15 +17,25 @@ This is probably the easiest way to use the model.
 
 Added support for Zyphra Zonos. Just try this out:
 
+```bash
+str2speech --text "Hello again" \
+    --model "Zyphra/Zonos-v0.1-transformer" \
+    --output helloagain.wav
 ```
+
+Alternatively, you could write Python code to use it:
+
+```python
 from str2speech.speaker import Speaker
 
 speaker = Speaker("Zyphra/Zonos-v0.1-transformer")
 speaker.text_to_speech("Hello, this is a test!", "output.wav")
 ```
 
-This expects you to have Zonos installed. If you don't have it yet, run the following:
-```
+`str2speech` expects you to have Zonos installed on your system already.
+If you don't have it yet, run the following:
+
+```bash
 !apt install espeak-ng
 !git clone https://github.com/Zyphra/Zonos.git
 !cd Zonos && pip install -e .
