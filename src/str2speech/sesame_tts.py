@@ -12,7 +12,7 @@ class SesameTTS:
             sys.exit(2)
             
         model_path = hf_hub_download(repo_id="sesame/csm-1b", filename="ckpt.pt", token=hf_token)
-        self.model = load_csm_1b(model_path, "cuda")
+        self.model = load_csm_1b("cuda")
         self.voice = None
 
     def generate(self, prompt, output_file, sample_rate):
