@@ -1,4 +1,4 @@
-from .sesame.generator import load_csm_1b
+from .sesame_g import load_csm_1b
 from huggingface_hub import hf_hub_download
 import os
 import torchaudio
