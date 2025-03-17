@@ -21,7 +21,7 @@ setup(
         "torchaudio",
         "scipy>=1.13.1",
         "accelerate",
-        "numpy>=2.2.3",
+        "numpy==1.26.4",
         "kokoro>=0.8.4",
         "soundfile"
     ],
