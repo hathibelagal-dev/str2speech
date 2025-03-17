@@ -11,7 +11,7 @@ class SesameTTS:
             print("HF_TOKEN is required but not found. Please set it as an environment variable.")
             sys.exit(2)
             
-        model_path = hf_hub_download(repo_id="sesame/csm-1b", filename="ckpt.pt", token=hf_token)
+        hf_hub_download(repo_id="sesame/csm-1b", filename="ckpt.pt", token=hf_token)
         self.model = load_csm_1b("cuda")
         self.voice = None
 
