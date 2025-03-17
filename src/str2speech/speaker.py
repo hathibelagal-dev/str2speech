@@ -36,17 +36,13 @@ class Speaker:
                 self.sample_rate = getattr(self.model.autoencoder, "sampling_rate", 44100)
             except ImportError:
                 print("Note: Zonos model requires the zonos package.")
-                install_zonos = input("Do you want to install it now? (y/n)")
-                if install_zonos.lower() == "y":
-                    Cloner.clone_and_install("https://github.com/hathibelagal-dev/Zonos.git")
-                    try:
-                        from zonos.model import Zonos                
-                        self.model = Zonos.from_pretrained(tts_model, device=self.device)
-                        self.sample_rate = getattr(self.model.autoencoder, "sampling_rate", 44100)
-                    except:
-                        print("Couldn't install/use Zonos.")
-                        sys.exit(1)
-                else:
+                Cloner.clone_and_install("https://github.com/hathibelagal-dev/Zonos.git")
+                try:
+                    from zonos.model import Zonos                
+                    self.model = Zonos.from_pretrained(tts_model, device=self.device)
+                    self.sample_rate = getattr(self.model.autoencoder, "sampling_rate", 44100)
+                except:
+                    print("Couldn't install/use Zonos.")
                     sys.exit(1)
         elif "kokoro" in tts_model.lower():
             self.model = KokoroTTS()
