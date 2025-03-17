@@ -1,27 +1,33 @@
 import os
-import tempfile
-import shutil
 import git
 from pip._internal.cli.main import main as pip_main
 
 class Cloner:
     @staticmethod
-    def clone_and_install(repo_url, keep_temp_dir=False):
-        temp_dir = tempfile.mkdtemp()
+    def clone_and_install(repo_url):
         original_dir = os.getcwd()
         installation_path = None
         success = False
         
+        target_dir = os.path.join(os.path.expanduser("~"), '.str2speech')
+            
         try:
-            os.chdir(temp_dir)
+            if not os.path.exists(target_dir):
+                os.makedirs(target_dir)
+                
+            os.chdir(target_dir)
+            
             repo_name = repo_url.split('/')[-1].replace('.git', '')
-            print(f"Cloning repository from {repo_url} into temporary directory...")            
-            repo = git.Repo.clone_from(repo_url, repo_name)
+            print(f"Cloning repository from {repo_url} into {target_dir}...")
+            
+            git.Repo.clone_from(repo_url, repo_name)
             
             if os.path.exists(repo_name):
                 os.chdir(repo_name)
-                print("Installing repository...")            
+                print("Installing repository...")
+                
                 install_result = pip_main(['install', '-e', '.'])
+                
                 if install_result == 0:
                     installation_path = os.path.abspath('.')
                     success = True
@@ -37,15 +43,9 @@ class Cloner:
             print(f"Unexpected error: {str(e)}")
         finally:
             os.chdir(original_dir)
-            if not keep_temp_dir and os.path.exists(temp_dir):
-                try:
-                    shutil.rmtree(temp_dir)
-                    print("Temporary directory cleaned up.")
-                except Exception as e:
-                    print(f"Error cleaning up temporary directory: {str(e)}")
             
         return {
             "success": success,
             "installation_path": installation_path,
-            "temp_dir": temp_dir if keep_temp_dir else None
+            "repo_name": repo_name if success else None
         }
