@@ -12,7 +12,6 @@ from transformers import AutoTokenizer
 class Segment:
     speaker: int
     text: str
-    # (num_samples,), sample_rate = 24_000
     audio: torch.Tensor
 
 
@@ -43,7 +42,7 @@ class Generator:
 
         self._text_tokenizer = load_llama3_tokenizer()
 
-        device = next(model.parameters()).device
+        device = "cuda"
         mimi_weight = hf_hub_download(loaders.DEFAULT_REPO, loaders.MIMI_NAME)
         mimi = loaders.get_mimi(mimi_weight, device=device)
         mimi.set_num_codebooks(32)
