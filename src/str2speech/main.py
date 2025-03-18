@@ -3,7 +3,7 @@ import argparse
 import time
 from transformers import logging
 import str2speech.speaker as speaker
-
+import sys
 import warnings
 warnings.filterwarnings("ignore")
 logging.set_verbosity_error()
@@ -33,7 +33,21 @@ def main():
         "-m",
         help="The TTS model to use. If not provided, the default model will be chosen.",
     )
+    parser.add_argument(
+        "--list-models",
+        "-l",
+        action="store_true",
+        help="List all available TTS models."
+    )
     args = parser.parse_args()
+
+    if args.list_models:
+        print("Available TTS models:")
+        i = 0
+        for (_, v) in speaker.Speaker.list_models().items():
+            print(f"{i}. {v}")
+            i += 1
+        sys.exit(0)
 
     text = args.text
     if not text:
