@@ -6,7 +6,11 @@ import torch
 import sys
 
 class SesameTTS:
-    def __init__(self):                    
+    def __init__(self):
+        hf_token = os.environ.get("HF_TOKEN")
+        if not hf_token:
+            print("HF_TOKEN is required but not found. Please set it as an environment variable.")
+            sys.exit(2)
         self.model = load_csm_1b("cuda" if torch.cuda.is_available() else "cpu")
         self.voice = None
 
