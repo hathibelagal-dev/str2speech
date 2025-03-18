@@ -7,12 +7,14 @@ import sys
 from .kokoro_tts import KokoroTTS
 from .cloner import Cloner
 from .sesame_tts import SesameTTS
+import os
 
 class Speaker:
     def __init__(self, tts_model: str = None):
         tts_model = tts_model.lower()
         import logging as l
         l.getLogger("torch").setLevel(l.ERROR)
+        os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
         if not tts_model or tts_model not in [
             model["name"] for model in Speaker.list_models()
         ]:
