@@ -12,21 +12,19 @@ export HF_TOKEN=<your huggingface token>
 str2speech --text "Hello from Sesame" --model "sesame/csm-1b"
 ```
 
-Note that this model needs a GPU to run.
-
 ---
 
-Added support for Kokoro-82M. Just try this out:
+Added support for Kokoro-82M. This is how you run it:
 
 ```bash
 str2speech --text "Hello again" --model "kokoro"
 ```
 
-This is probably the easiest way to use the model.
+This is probably the easiest way to use Kokoro TTS.
 
 ---
 
-Added support for Zyphra Zonos. Just try this out:
+Added support for Zyphra Zonos. Try this out:
 
 ```bash
 str2speech --text "Hello again" \
