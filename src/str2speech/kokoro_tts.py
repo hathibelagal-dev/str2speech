@@ -1,16 +1,23 @@
 from kokoro import KPipeline
 import soundfile as sf
+from .base_tts import BaseTTS
 
-class KokoroTTS:
-    def __init__(self, voice:str = "af_heart"):
-        self.pipeline = KPipeline(lang_code='a', repo_id="hexgrad/Kokoro-82M")
-        self.voice = voice
+class KokoroTTS(BaseTTS):
+    def __init__(self, voice_preset:str = "af_heart"):
+        super().__init__()
+        self.pipeline = KPipeline(
+            lang_code='a', 
+            repo_id="hexgrad/Kokoro-82M", device=self.device
+        )
+        self.voice_preset = voice_preset
+        self.sample_rate = 24000
 
-    def generate(self, prompt, output, sample_rate):
+    def generate(self, prompt, output_file):
         g = self.pipeline(
-            prompt, voice=self.voice,
+            prompt, voice=self.voice_preset,
             speed=1
         )
-        for _, (_, _, audio) in enumerate(g):
-            sf.write(output, audio, sample_rate)
+        for item in g:
+            sf.write(output_file, item.output.audio, self.sample_rate)
+            print("Audio saved.")
 

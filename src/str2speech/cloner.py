@@ -1,17 +1,16 @@
 import os
 import git
 from pip._internal.cli.main import main as pip_main
-from .utils import is_colab
-import subprocess
+from .utils import is_colab, get_str2speech_home
 
 class Cloner:
     @staticmethod
-    def clone_and_install(repo_url):
+    def clone_and_install(repo_url, dev_mode = True):
         original_dir = os.getcwd()
         installation_path = None
         success = False
         
-        target_dir = os.path.join(os.path.expanduser("~"), '.str2speech')
+        target_dir = get_str2speech_home()
             
         try:
             if not os.path.exists(target_dir):
@@ -28,24 +27,15 @@ class Cloner:
                 os.chdir(repo_name)
                 print("Installing repository...")
                 
-                install_result = pip_main(['install', '-e', '.'])
+                if dev_mode:
+                    install_result = pip_main(['install', '-e', '.'])
+                else:
+                    install_result = pip_main(['install', '.'])
                 
                 if install_result == 0:
                     installation_path = os.path.abspath('.')
                     success = True
-                    print("Successfully cloned and installed the repository!")
-
-                    if is_colab():
-                        try:
-                            result = subprocess.run(
-                                ['sudo', 'apt', 'install', 'espeak-ng', '-y'],
-                                check=True,
-                                capture_output=True,
-                                text=True
-                            )
-                            print(result.stdout)
-                        except subprocess.CalledProcessError as e:
-                            pass                                                
+                    print("Successfully cloned and installed the repository!")                                                              
                 else:
                     print(f"pip install failed with code {install_result}")
             else:
