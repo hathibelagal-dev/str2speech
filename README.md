@@ -1,9 +1,19 @@
-# str2speech
+# 👉 str2speech 👈 🦾🔊
 
 ## Overview
 `str2speech` is a simple command-line tool for converting text to speech using Transformer-based text-to-speech (TTS) models. It supports multiple models and voice presets, allowing users to generate high-quality speech audio from text.
 
 ## Latest
+
+We now support Spark-TTS-0.5B. This is an awesome model. Here's how you use it:
+
+```bash
+str2speech --model "SparkAudio/Spark-TTS-0.5B" \
+        --text "Hello from Spark" \
+        --output "sparktest.wav"
+```
+
+---
 
 Added support for Sesame CSM-1B. Here's how to use it:
 
@@ -62,10 +72,10 @@ cd Zonos && pip install -e .
 ## Available Models
 
 The following models are supported:
-- `Zyphra/Zonos-v0.1-transformer`
-- `Kokoro`
 - `Sesame/CSM-1B`
 - `SparkAudio/Spark-TTS-0.5B`
+- `Zyphra/Zonos-v0.1-transformer`
+- `Kokoro`
 - `suno/bark-small` (default)
 - `suno/bark`
 - `facebook/mms-tts-eng`
