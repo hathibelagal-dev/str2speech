@@ -2,7 +2,6 @@ import os
 import git
 from pip._internal.cli.main import main as pip_main
 from .utils import is_colab, get_str2speech_home
-import subprocess
 
 class Cloner:
     @staticmethod
