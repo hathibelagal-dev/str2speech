@@ -7,6 +7,7 @@ import scipy.io.wavfile as wav
 class ZonosTTS(BaseTTS):
     model_name = "zyphra/zonos-v0.1-transformer"
     def __init__(self):
+        super().__init__()
         try:
             from zonos.model import Zonos                
             self.model = Zonos.from_pretrained(self.model_name, device=self.device)

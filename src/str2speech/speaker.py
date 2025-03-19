@@ -3,11 +3,11 @@ from .bark_tts import BarkTTS
 from .sesame_tts import SesameTTS
 from .mms_tts import MMSTTS
 from .zonos_tts import ZonosTTS
-import os
 
 class Speaker:
     def __init__(self, tts_model: str = None):
-        tts_model = tts_model.lower()
+        if tts_model:
+            tts_model = tts_model.lower()
         import logging as l
         l.getLogger("torch").setLevel(l.ERROR)        
         if not tts_model or tts_model not in [
@@ -18,7 +18,7 @@ class Speaker:
 
         self.tts_model = tts_model
         if "bark" in tts_model:
-            self.model = BarkTTS("small" if "small" in tts_model else "large", voice_preset=None)
+            self.model = BarkTTS("small" if "small" in tts_model else "large")
         elif "mms-tts" in tts_model:            
             self.model = MMSTTS(tts_model)
         elif "zonos" in tts_model:

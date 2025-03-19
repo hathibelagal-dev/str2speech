@@ -8,6 +8,7 @@ import sys
 class SesameTTS:
     model_name = "sesame/csm-1b"
     def __init__(self):
+        super().__init__()
         hf_token = os.environ.get("HF_TOKEN")
         if not hf_token:
             print("HF_TOKEN is required but not found. Please set it as an environment variable.")

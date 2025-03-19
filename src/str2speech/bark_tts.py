@@ -4,6 +4,7 @@ import scipy.io.wavfile as wav
 
 class BarkTTS(BaseTTS):
     def __init__(self, model_type: str):
+        super().__init__()
         self.model_name = "suno/bark-small" if model_type == "small" else "suno/bark"
         self.processor = AutoProcessor.from_pretrained(self.model_name)
         self.model = BarkModel.from_pretrained("suno/bark-small").to(self.device)

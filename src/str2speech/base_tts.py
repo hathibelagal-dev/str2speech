@@ -7,4 +7,4 @@ class BaseTTS(ABC):
 
     @abstractmethod
     def generate(self, prompt, output_file):
-        pass    
+        pass

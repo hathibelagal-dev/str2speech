@@ -1,9 +1,14 @@
 from kokoro import KPipeline
 import soundfile as sf
+from .base_tts import BaseTTS
 
-class KokoroTTS:
+class KokoroTTS(BaseTTS):
     def __init__(self, voice_preset:str = "af_heart"):
-        self.pipeline = KPipeline(lang_code='a', repo_id="hexgrad/Kokoro-82M")
+        super().__init__()
+        self.pipeline = KPipeline(
+            lang_code='a', 
+            repo_id="hexgrad/Kokoro-82M", device=self.device
+        )
         self.voice_preset = voice_preset
         self.sample_rate = 24000
 
