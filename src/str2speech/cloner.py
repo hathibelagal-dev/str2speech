@@ -5,7 +5,7 @@ from .utils import is_colab, get_str2speech_home
 
 class Cloner:
     @staticmethod
-    def clone_and_install(repo_url):
+    def clone_and_install(repo_url, dev_mode = True):
         original_dir = os.getcwd()
         installation_path = None
         success = False
@@ -27,7 +27,10 @@ class Cloner:
                 os.chdir(repo_name)
                 print("Installing repository...")
                 
-                install_result = pip_main(['install', '-e', '.'])
+                if dev_mode:
+                    install_result = pip_main(['install', '-e', '.'])
+                else:
+                    install_result = pip_main(['install', '.'])
                 
                 if install_result == 0:
                     installation_path = os.path.abspath('.')
