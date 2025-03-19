@@ -54,5 +54,5 @@ class Speaker:
             {"name": "kokoro"},
             {"name": "sesame/csm-1b"},
             {"name": "zyphra/zonos-v0.1-transformer"},
-            {"name": "SparkAudio/Spark-TTS-0.5B"}
+            {"name": "sparkaudio/spark-tts-0.5b"}
         ]
