@@ -62,16 +62,16 @@ cd Zonos && pip install -e .
 ## Available Models
 
 The following models are supported:
+- `Zyphra/Zonos-v0.1-transformer`
+- `Kokoro`
+- `Sesame/CSM-1B`
+- `SparkAudio/Spark-TTS-0.5B`
 - `suno/bark-small` (default)
 - `suno/bark`
 - `facebook/mms-tts-eng`
 - `facebook/mms-tts-deu`
 - `facebook/mms-tts-fra`
 - `facebook/mms-tts-spa`
-- `Zyphra/Zonos-v0.1-transformer`
-- `Kokoro`
-- `Sesame/CSM-1B`
-- `SparkAudio/Spark-TTS-0.5B`
 
 ## Installation
 
