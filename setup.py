@@ -32,7 +32,8 @@ setup(
         "huggingface_hub",
         "soxr==0.5.0.post1",
         "einops==0.8.1",
-        "einx==0.3.0"
+        "einx==0.3.0",
+        "requests"
     ],
     entry_points={
         "console_scripts": [
