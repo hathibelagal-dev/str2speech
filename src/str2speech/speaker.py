@@ -37,7 +37,7 @@ class Speaker:
             if voice_preset:
                 self.model.voice_preset = voice_preset
             self.model.generate(text, output_file)
-        elif "mms-tts" in self.tts_model or "zonos" in self.tts_model or "sesame" in self.tts_model:
+        elif "mms-tts" in self.tts_model or "zonos" in self.tts_model or "sesame" in self.tts_model or "spark" in self.tts_model:
             if voice_preset:
                 print("WARNING: Voice presets are currently not supported for this model.")
             self.model.generate(text, output_file)
