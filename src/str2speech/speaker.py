@@ -3,12 +3,14 @@ from .bark_tts import BarkTTS
 from .sesame_tts import SesameTTS
 from .mms_tts import MMSTTS
 from .zonos_tts import ZonosTTS
+from .spark_tts import SparkTTS
 
 class Speaker:
     def __init__(self, tts_model: str = None):
         if tts_model:
             tts_model = tts_model.lower()
-        import logging as l
+        print(f"Model provided: {tts_model}")
+        import logging as l        
         l.getLogger("torch").setLevel(l.ERROR)        
         if not tts_model or tts_model not in [
             model["name"] for model in Speaker.list_models()
@@ -26,7 +28,9 @@ class Speaker:
         elif "kokoro" in tts_model:
             self.model = KokoroTTS()            
         elif "sesame" in tts_model:
-            self.model = SesameTTS()            
+            self.model = SesameTTS()
+        elif "spark" in tts_model:            
+            self.model = SparkTTS()           
 
     def text_to_speech(self, text: str, output_file: str, voice_preset: str = None):
         if "bark" in self.tts_model or "kokoro" in self.tts_model:
