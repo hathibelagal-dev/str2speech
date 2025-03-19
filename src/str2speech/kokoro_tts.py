@@ -12,12 +12,12 @@ class KokoroTTS(BaseTTS):
         self.voice_preset = voice_preset
         self.sample_rate = 24000
 
-    def generate(self, prompt, output):
+    def generate(self, prompt, output_file):
         g = self.pipeline(
             prompt, voice=self.voice_preset,
             speed=1
         )
-        for _, (_, _, audio) in enumerate(g):
-            sf.write(output, audio, self.sample_rate)
-        print("Audio saved.")
+        for item in g:
+            sf.write(output_file, item.output.audio, self.sample_rate)
+            print("Audio saved.")
 
