@@ -1,7 +1,7 @@
 import os
 import git
 from pip._internal.cli.main import main as pip_main
-from .utils import is_colab
+from .utils import is_colab, get_str2speech_home
 import subprocess
 
 class Cloner:
@@ -11,7 +11,7 @@ class Cloner:
         installation_path = None
         success = False
         
-        target_dir = os.path.join(os.path.expanduser("~"), '.str2speech')
+        target_dir = get_str2speech_home()
             
         try:
             if not os.path.exists(target_dir):

@@ -1,12 +1,10 @@
-from transformers import AutoProcessor, BarkModel
-from transformers import VitsTokenizer, VitsModel
-
 import scipy.io.wavfile as wav
 import torch
-import sys
 from .kokoro_tts import KokoroTTS
-from .cloner import Cloner
+from .bark_tts import BarkTTS
 from .sesame_tts import SesameTTS
+from .mms_tts import MMSTTS
+from .zonos_tts import ZonosTTS
 import os
 
 class Speaker:
@@ -21,35 +19,17 @@ class Speaker:
             tts_model = Speaker.list_models()[0]["name"]
             print("Choosing default model: " + tts_model)
 
-        self.tts_model = tts_model
-        self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        if "zonos" not in tts_model and "kokoro" not in tts_model and "sesame" not in tts_model:
-            self.processor = AutoProcessor.from_pretrained(tts_model)
+        self.tts_model = tts_model 
         if "bark" in tts_model:
-            self.model = BarkModel.from_pretrained(tts_model).to(self.device)
-            if self.device != "cpu":
-                self.model.enable_cpu_offload()
-            self.sample_rate = self.model.generation_config.sample_rate
-        elif "mms-tts" in tts_model:
-            self.model = VitsModel.from_pretrained(tts_model).to(self.device)
-            self.tokenizer = VitsTokenizer.from_pretrained(tts_model)
-            self.sample_rate = 16000
+            self.model = BarkTTS("small" if "small" in tts_model else "large")
+        elif "mms-tts" in tts_model:            
+            self.model = MMSTTS(tts_model)
         elif "zonos" in tts_model:
-            try:
-                from zonos.model import Zonos                
-                self.model = Zonos.from_pretrained(tts_model, device=self.device)
-                self.sample_rate = getattr(self.model.autoencoder, "sampling_rate", 44100)
-            except ImportError:
-                print("Note: Zonos model requires the zonos package.")
-                Cloner.clone_and_install("https://github.com/hathibelagal-dev/Zonos.git")
-                print("Please re-run str2speech for the Zonos model to work.")
-                sys.exit(0)
+            self.model = ZonosTTS()
         elif "kokoro" in tts_model:
-            self.model = KokoroTTS()
-            self.sample_rate = 24000
+            self.model = KokoroTTS()            
         elif "sesame" in tts_model:
-            self.model = SesameTTS()
-            self.sample_rate = 24000
+            self.model = SesameTTS()            
 
     def text_to_speech(self, text: str, output_file: str, voice_preset: str = None):
         if "bark" in self.tts_model:
@@ -105,5 +85,6 @@ class Speaker:
             {"name": "facebook/mms-tts-spa"},
             {"name": "kokoro"},
             {"name": "sesame/csm-1b"},
-            {"name": "zyphra/zonos-v0.1-transformer"}
+            {"name": "zyphra/zonos-v0.1-transformer"},
+            {"name": "SparkAudio/Spark-TTS-0.5B"}
         ]

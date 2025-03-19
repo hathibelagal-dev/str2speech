@@ -13,6 +13,7 @@ class SesameTTS:
             sys.exit(2)
         self.model = load_csm_1b("cuda" if torch.cuda.is_available() else "cpu")
         self.voice = None
+        self.sample_rate = 24000
 
     def generate(self, prompt, output_file, sample_rate):
         audio = self.model.generate(
