@@ -7,7 +7,7 @@ class BarkTTS(BaseTTS):
         super().__init__()
         self.model_name = model_name
         self.processor = AutoProcessor.from_pretrained(self.model_name)
-        self.model = BarkModel.from_pretrained("suno/bark-small").to(self.device)
+        self.model = BarkModel.from_pretrained(self.model_name).to(self.device)
         self.sample_rate = self.model.generation_config.sample_rate
         if self.device != "cpu":
             self.model.enable_cpu_offload()
