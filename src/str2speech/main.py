@@ -46,8 +46,8 @@ def main():
     if args.list_models:
         print("Available TTS models:")
         i = 0
-        for (_, v) in speaker.Speaker.list_models():
-            print(f"{i}. {v}")
+        for model in speaker.Speaker.list_models():
+            print(f"{i}. {model['name']}")
             i += 1
         sys.exit(0)
 
