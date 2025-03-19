@@ -3,9 +3,9 @@ from transformers import AutoProcessor, BarkModel
 import scipy.io.wavfile as wav
 
 class BarkTTS(BaseTTS):
-    def __init__(self, model_type: str):
+    def __init__(self, model_name: str):
         super().__init__()
-        self.model_name = "suno/bark-small" if model_type == "small" else "suno/bark"
+        self.model_name = model_name
         self.processor = AutoProcessor.from_pretrained(self.model_name)
         self.model = BarkModel.from_pretrained("suno/bark-small").to(self.device)
         self.sample_rate = self.model.generation_config.sample_rate

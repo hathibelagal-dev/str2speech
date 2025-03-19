@@ -18,7 +18,7 @@ class Speaker:
 
         self.tts_model = tts_model
         if "bark" in tts_model:
-            self.model = BarkTTS("small" if "small" in tts_model else "large")
+            self.model = BarkTTS(tts_model)
         elif "mms-tts" in tts_model:            
             self.model = MMSTTS(tts_model)
         elif "zonos" in tts_model:
