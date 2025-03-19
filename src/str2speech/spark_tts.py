@@ -4,6 +4,7 @@ import os
 from .base_tts import BaseTTS
 from .cloner import Cloner
 import requests
+import subprocess
 
 class SparkTTS(BaseTTS):
     model_name = "SparkAudio/Spark-TTS-0.5B"
@@ -31,7 +32,10 @@ class SparkTTS(BaseTTS):
             Cloner.clone_and_install("https://github.com/hathibelagal-dev/Spark-TTS.git")
 
     def generate(self, prompt, output_file):
-        pass
+        command = f"sparktts --text '{prompt}' --save_file '{output_file}' --model_dir '{self.model_dir}'"
+        subprocess.run(command, shell=True)
+        print("Audio saved.")
+        
 
 
     
