@@ -28,7 +28,10 @@ class SparkTTS(BaseTTS):
             from sparktts.models.audio_tokenizer import BiCodecTokenizer
         except:
             print("Installing sparktts")
-            Cloner.clone_and_install("https://github.com/hathibelagal-dev/Spark-TTS.git")            
+            Cloner.clone_and_install("https://github.com/hathibelagal-dev/Spark-TTS.git")
+
+    def generate(self, prompt, output_file):
+        pass
 
 
     
