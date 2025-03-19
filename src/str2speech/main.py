@@ -4,12 +4,14 @@ import time
 from transformers import logging
 import str2speech.speaker as speaker
 import sys
+import os
 import warnings
 warnings.filterwarnings("ignore")
 logging.set_verbosity_error()
 
 def main():
     print(f"Now running str2speech {str2speech.__version__}")
+    os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 
     parser = argparse.ArgumentParser(description="A tool to convert text to speech.")
     parser.add_argument("--text", "-t", help="The text to convert to speech.")

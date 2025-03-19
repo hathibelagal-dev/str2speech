@@ -6,6 +6,7 @@ import torch
 import sys
 
 class SesameTTS:
+    model_name = "sesame/csm-1b"
     def __init__(self):
         hf_token = os.environ.get("HF_TOKEN")
         if not hf_token:
@@ -15,11 +16,12 @@ class SesameTTS:
         self.voice = None
         self.sample_rate = 24000
 
-    def generate(self, prompt, output_file, sample_rate):
+    def generate(self, prompt, output_file):
         audio = self.model.generate(
             text=prompt,
             speaker=0,
             context=[],
             max_audio_length_ms=120000
         )
-        torchaudio.save(output_file, audio.unsqueeze(0).cpu(), sample_rate)
+        torchaudio.save(output_file, audio.unsqueeze(0).cpu(), self.sample_rate)
+        print("Audio saved.")

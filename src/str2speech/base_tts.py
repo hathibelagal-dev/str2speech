@@ -6,5 +6,5 @@ class BaseTTS(ABC):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
 
     @abstractmethod
-    def generate(self, prompt, output, sample_rate):
+    def generate(self, prompt, output_file):
         pass    
