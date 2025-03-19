@@ -33,19 +33,7 @@ class Cloner:
                 if install_result == 0:
                     installation_path = os.path.abspath('.')
                     success = True
-                    print("Successfully cloned and installed the repository!")
-
-                    if is_colab():
-                        try:
-                            result = subprocess.run(
-                                ['sudo', 'apt', 'install', 'espeak-ng', '-y'],
-                                check=True,
-                                capture_output=True,
-                                text=True
-                            )
-                            print(result.stdout)
-                        except subprocess.CalledProcessError as e:
-                            pass                                                
+                    print("Successfully cloned and installed the repository!")                                                              
                 else:
                     print(f"pip install failed with code {install_result}")
             else:

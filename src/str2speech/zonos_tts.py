@@ -15,7 +15,7 @@ class ZonosTTS(BaseTTS):
         except ImportError:
             print("Note: Zonos model requires the zonos package.")
             Cloner.clone_and_install("https://github.com/hathibelagal-dev/Zonos.git")
-            print("Please re-run str2speech for the Zonos model to work.")
+            print("We just installed Zonos. Please re-run str2speech for the Zonos model to work.")
             sys.exit(0)
 
     def generate(self, prompt, output_file):

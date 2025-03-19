@@ -9,7 +9,7 @@ class BarkTTS(BaseTTS):
         self.processor = AutoProcessor.from_pretrained(self.model_name)
         self.model = BarkModel.from_pretrained(self.model_name).to(self.device)
         self.sample_rate = self.model.generation_config.sample_rate
-        if self.device != "cpu":
+        if self.device != "cpu" and "small" not in model_name:
             self.model.enable_cpu_offload()
         self.voice_preset = None
 
