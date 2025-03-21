@@ -2,7 +2,8 @@ from .base_tts import BaseTTS
 from transformers import VitsTokenizer, VitsModel, AutoProcessor
 import scipy.io.wavfile as wav
 import torch
-    
+
+
 class MMSTTS(BaseTTS):
     def __init__(self, model_name):
         super().__init__()

@@ -2,6 +2,7 @@ from .base_tts import BaseTTS
 from transformers import AutoProcessor, BarkModel
 import scipy.io.wavfile as wav
 
+
 class BarkTTS(BaseTTS):
     def __init__(self, model_name: str):
         super().__init__()

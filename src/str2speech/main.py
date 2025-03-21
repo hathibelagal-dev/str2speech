@@ -6,8 +6,10 @@ import str2speech.speaker as speaker
 import sys
 import os
 import warnings
+
 warnings.filterwarnings("ignore")
 logging.set_verbosity_error()
+
 
 def main():
     print(f"Now running str2speech {str2speech.__version__}")
@@ -39,7 +41,7 @@ def main():
         "--list-models",
         "-l",
         action="store_true",
-        help="List all available TTS models."
+        help="List all available TTS models.",
     )
     args = parser.parse_args()
 
@@ -70,7 +72,6 @@ def main():
         s.text_to_speech(text, output, args.voice)
         end_time = time.time()
         print(f"Generated speech in {end_time - start_time:.2f} seconds.")
-        print(f"Output saved to {output}.")
     except Exception as e:
         print(
             f"ERROR: Couldn't generate speech. Try choosing a different TTS model. Error: {e}"
