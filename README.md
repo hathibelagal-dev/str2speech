@@ -1,4 +1,4 @@
-# 👉 str2speech 👈 🦾🔊
+# 👉 str2speech
 
 ## Overview
 `str2speech` is a simple command-line tool for converting text to speech using Transformer-based text-to-speech (TTS) models. It supports multiple models and voice presets, allowing users to generate high-quality speech audio from text.
