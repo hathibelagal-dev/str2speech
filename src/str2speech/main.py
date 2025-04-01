@@ -38,6 +38,11 @@ def main():
         help="The TTS model to use. If not provided, the default model will be chosen.",
     )
     parser.add_argument(
+        "--speed",
+        "-s",
+        help="The speed of the speech. If not provided, the default speed will be used. Only supported by Kokoro TTS currently.",
+    )
+    parser.add_argument(
         "--list-models",
         "-l",
         action="store_true",
@@ -69,7 +74,11 @@ def main():
     try:
         start_time = time.time()
         s = speaker.Speaker(args.model)
-        s.text_to_speech(text, output, args.voice)
+        speed = args.speed
+        if(speed):
+            speed = float(speed)
+            print(f"Using speed: {speed}")
+        s.text_to_speech(text, output, args.voice, speed)
         end_time = time.time()
         print(f"Generated speech in {end_time - start_time:.2f} seconds.")
     except Exception as e:

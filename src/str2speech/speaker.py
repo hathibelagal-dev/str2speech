@@ -4,6 +4,7 @@ from .sesame_tts import SesameTTS
 from .mms_tts import MMSTTS
 from .zonos_tts import ZonosTTS
 from .spark_tts import SparkTTS
+from .speecht5_tts import SpeechT5TTS
 
 
 class Speaker:
@@ -33,17 +34,22 @@ class Speaker:
             self.model = SesameTTS()
         elif "spark" in tts_model:
             self.model = SparkTTS()
+        elif "speecht5" in tts_model:
+            self.model = SpeechT5TTS()            
 
-    def text_to_speech(self, text: str, output_file: str, voice_preset: str = None):
+    def text_to_speech(self, text: str, output_file: str, voice_preset: str = None, speed: float = 1.0):
         if "bark" in self.tts_model or "kokoro" in self.tts_model:
             if voice_preset:
                 self.model.voice_preset = voice_preset
+            if type(self.model) == KokoroTTS:
+                self.model.speed = speed
             self.model.generate(text, output_file)
         elif (
             "mms-tts" in self.tts_model
             or "zonos" in self.tts_model
             or "sesame" in self.tts_model
             or "spark" in self.tts_model
+            or "speecht5" in self.tts_model
         ):
             if voice_preset:
                 print(
@@ -64,4 +70,5 @@ class Speaker:
             {"name": "sesame/csm-1b"},
             {"name": "zyphra/zonos-v0.1-transformer"},
             {"name": "sparkaudio/spark-tts-0.5b"},
+            {"name": "microsoft/speecht5_tts"}
         ]
