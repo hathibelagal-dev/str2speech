@@ -35,7 +35,6 @@ setup(
         "einx==0.3.0",
         "requests",
         "snac>=1.2.1",
-        "vllm==0.7.3"
     ],
     entry_points={
         "console_scripts": [

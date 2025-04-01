@@ -5,17 +5,6 @@
 
 ## Latest
 
-Added support for Orpheus TTS. You can now easily run Orpheus-3B-0.1-ft with this tool.
-
-```bash
-!str2speech --model "orpheus" \
-    --text "Hello from Orpheus" \
-    --voice "julia"
-    --output "orpheustest.wav"
-```
-
----
-
 We now support Microsoft's Speech T5. This is a very lightweight model, and sounds pretty good. Try it out with this:
 
 ```bash
@@ -95,7 +84,6 @@ cd Zonos && pip install -e .
 The following models are supported:
 - `Sesame/CSM-1B`
 - `SparkAudio/Spark-TTS-0.5B`
-- `Orpheus`
 - `Zyphra/Zonos-v0.1-transformer`
 - `microsoft/speecht5_tts`
 - `Kokoro`

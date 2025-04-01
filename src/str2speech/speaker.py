@@ -34,12 +34,9 @@ class Speaker:
         elif "speecht5" in tts_model:
             from .speecht5_tts import SpeechT5TTS
             self.model = SpeechT5TTS()
-        elif "orpheus" in tts_model:
-            from .orpheus_tts import OrpheusTTS
-            self.model = OrpheusTTS()
 
     def text_to_speech(self, text: str, output_file: str, voice_preset: str = None, speed: float = 1.0):
-        if "bark" in self.tts_model or "kokoro" in self.tts_model or "orpheus" in self.tts_model:
+        if "bark" in self.tts_model or "kokoro" in self.tts_model:
             if voice_preset:
                 self.model.voice_preset = voice_preset
             self.model.speed = float(speed)
@@ -67,7 +64,6 @@ class Speaker:
             {"name": "facebook/mms-tts-fra"},
             {"name": "facebook/mms-tts-spa"},
             {"name": "kokoro"},
-            {"name": "orpheus"},
             {"name": "sesame/csm-1b"},
             {"name": "zyphra/zonos-v0.1-transformer"},
             {"name": "sparkaudio/spark-tts-0.5b"},
