@@ -5,6 +5,7 @@ from .mms_tts import MMSTTS
 from .zonos_tts import ZonosTTS
 from .spark_tts import SparkTTS
 from .speecht5_tts import SpeechT5TTS
+from .orpheus_tts import OrpheusTTS
 
 
 class Speaker:
@@ -35,7 +36,9 @@ class Speaker:
         elif "spark" in tts_model:
             self.model = SparkTTS()
         elif "speecht5" in tts_model:
-            self.model = SpeechT5TTS()            
+            self.model = SpeechT5TTS()
+        elif "orpheus" in tts_model:
+            self.model = OrpheusTTS()
 
     def text_to_speech(self, text: str, output_file: str, voice_preset: str = None, speed: float = 1.0):
         if "bark" in self.tts_model or "kokoro" in self.tts_model:
@@ -67,6 +70,7 @@ class Speaker:
             {"name": "facebook/mms-tts-fra"},
             {"name": "facebook/mms-tts-spa"},
             {"name": "kokoro"},
+            {"name": "orpheus"},
             {"name": "sesame/csm-1b"},
             {"name": "zyphra/zonos-v0.1-transformer"},
             {"name": "sparkaudio/spark-tts-0.5b"},
