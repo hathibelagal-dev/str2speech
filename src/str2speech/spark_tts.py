@@ -42,6 +42,4 @@ class SparkTTS(BaseTTS):
 
     def generate(self, prompt, output_file):
         command = f"sparktts --text '{prompt}' --save_file '{output_file}' --model_dir '{self.model_dir}'"
-        print(command)
         subprocess.run(command, shell=True)
-        print("Audio saved.")
