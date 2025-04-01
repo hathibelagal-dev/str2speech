@@ -9,7 +9,7 @@ class OrpheusModel:
         self.dtype = dtype
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
-        self.model = AutoModelForCausalLM.from_pretrained(self.model_name, torch_dtype=self.dtype, token=os.environ.get("HF_TOKEN")).to(self.device)
+        self.model = AutoModelForCausalLM.from_pretrained(self.model_name, torch_dtype=self.dtype).to(self.device)
         self.available_voices = ["zoe", "zac", "jess", "leo", "mia", "julia", "leah"]
 
     def _map_model_params(self, model_name):
