@@ -5,6 +5,16 @@
 
 ## Latest
 
+We now support Microsoft's Speech T5. This is a very lightweight model, and sounds pretty good. Try it out with this:
+
+```bash
+str2speech --model "microsoft/speecht5_tts" \
+    --text "My dog is prettier than yours." \
+    --output "t5test.wav"
+```
+
+---
+
 We now support Spark-TTS-0.5B. This is an awesome model. Here's how you use it:
 
 ```bash
@@ -75,6 +85,7 @@ The following models are supported:
 - `Sesame/CSM-1B`
 - `SparkAudio/Spark-TTS-0.5B`
 - `Zyphra/Zonos-v0.1-transformer`
+- `microsoft/speecht5_tts`
 - `Kokoro`
 - `suno/bark-small` (default)
 - `suno/bark`
