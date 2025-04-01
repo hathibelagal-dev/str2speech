@@ -22,7 +22,11 @@ class Cloner:
             repo_name = repo_url.split("/")[-1].replace(".git", "")
             print(f"Cloning repository from {repo_url} into {target_dir}...")
 
-            git.Repo.clone_from(repo_url, repo_name)
+            if not os.path.exists(repo_name):
+                git.Repo.clone_from(repo_url, repo_name)
+            else:
+                print("Already installed.")
+                return
 
             if os.path.exists(repo_name):
                 os.chdir(repo_name)
