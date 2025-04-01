@@ -3,7 +3,7 @@ from .base_tts import BaseTTS
 import wave
 
 class OrpheusTTS(BaseTTS):
-    def __init__(self, model_name: str = "canopylabs/orpheus-3b-0.1-ft"):
+    def __init__(self, model_name: str = "canopylabs/orpheus-tts-0.1-finetune-prod"):
         super().__init__()
         self.model_name = model_name
         self.model = orpheus.engine_class.OrpheusModel(model_name=model_name)
