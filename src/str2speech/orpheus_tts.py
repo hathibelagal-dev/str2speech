@@ -7,7 +7,7 @@ class OrpheusTTS(BaseTTS):
         super().__init__()
         self.model_name = model_name
         self.model = orpheus.engine_class.OrpheusModel(model_name=model_name)
-        self.voice = "tara"
+        self.voice = "zoe"
 
     def generate(self, prompt, output_file):
         syn_tokens = self.model.generate_speech(
