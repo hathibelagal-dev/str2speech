@@ -2,12 +2,26 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from .decoder import tokens_decoder_sync
 import os
+import sys
+from ..utils import is_colab
 
 class OrpheusModel:
     def __init__(self, model_name, dtype=torch.bfloat16):
         self.model_name = self._map_model_params(model_name)
         self.dtype = dtype
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        token = os.environ.get("HF_TOKEN")
+        if not token:
+            if is_colab():
+                from google.colab import userdata
+                os.environ["HF_TOKEN"] = userdata.get("HF_TOKEN")
+                token = os.environ.get("HF_TOKEN")
+                if not token:
+                    print("HF_TOKEN is required but not found. Please set it as an environment variable.")
+            else:
+                print("HF_TOKEN is required but not found. Please set it as an environment variable.")
+                sys.exit(1)
+            
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
         self.model = AutoModelForCausalLM.from_pretrained(self.model_name, torch_dtype=self.dtype).to(self.device)
         self.available_voices = ["zoe", "zac", "jess", "leo", "mia", "julia", "leah"]
