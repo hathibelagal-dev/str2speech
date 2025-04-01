@@ -3,16 +3,16 @@ from .base_tts import BaseTTS
 import wave
 
 class OrpheusTTS(BaseTTS):
-    def __init__(self, model_name: str = "canopylabs/orpheus-tts-0.1-finetune-prod"):
+    def __init__(self, model_name: str = "canopylabs/orpheus-3b-0.1-ft"):
         super().__init__()
         self.model_name = model_name
         self.model = orpheus.engine_class.OrpheusModel(model_name=model_name)
-        self.voice = "zoe"
+        self.voice_preset = "zoe"
 
     def generate(self, prompt, output_file):
         syn_tokens = self.model.generate_speech(
             prompt=prompt,
-            voice=self.voice,
+            voice=self.voice_preset,
         )
 
         with wave.open(output_file, "wb") as wf:

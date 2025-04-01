@@ -39,7 +39,7 @@ class Speaker:
             self.model = OrpheusTTS()
 
     def text_to_speech(self, text: str, output_file: str, voice_preset: str = None, speed: float = 1.0):
-        if "bark" in self.tts_model or "kokoro" in self.tts_model:
+        if "bark" in self.tts_model or "kokoro" in self.tts_model or "orpheus" in self.tts_model:
             if voice_preset:
                 self.model.voice_preset = voice_preset
             self.model.speed = float(speed)

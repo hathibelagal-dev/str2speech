@@ -84,6 +84,7 @@ cd Zonos && pip install -e .
 The following models are supported:
 - `Sesame/CSM-1B`
 - `SparkAudio/Spark-TTS-0.5B`
+- `Orpheus`
 - `Zyphra/Zonos-v0.1-transformer`
 - `microsoft/speecht5_tts`
 - `Kokoro`
