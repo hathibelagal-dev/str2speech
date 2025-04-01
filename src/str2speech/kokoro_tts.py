@@ -12,7 +12,7 @@ class KokoroTTS(BaseTTS):
         )
         self.voice_preset = voice_preset
         self.sample_rate = 24000
-        self.speed = 1.0        
+        self.speed = 1.0
 
     def generate(self, prompt, output_file):
         g = self.pipeline(prompt, voice=self.voice_preset, speed=self.speed)
