@@ -7,7 +7,7 @@ import queue
 from .decoder import tokens_decoder_sync
 
 class OrpheusModel:
-    def __init__(self, model_name, dtype=torch.bfloat16):
+    def __init__(self, model_name, dtype=torch.half):
         self.model_name = self._map_model_params(model_name)
         self.dtype = dtype
         self.engine = self._setup_engine()
