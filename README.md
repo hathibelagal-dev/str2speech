@@ -117,6 +117,7 @@ str2speech --text "Hello, world!" --output hello.wav
 - `--voice` (`-v`): The voice preset to use (optional, defaults to a predefined voice).
 - `--output` (`-o`): The output `.wav` file name (optional, defaults to `output.wav`).
 - `--model` (`-m`): The TTS model to use (optional, defaults to `suno/bark-small`).
+- `--speed` (`-s`): The speed of the speech (optional, defaults to 1.0). Supported only by Kokoro TTS currently.
 
 Example:
 ```sh
