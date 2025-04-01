@@ -1,49 +1,55 @@
+import asyncio
 import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from vllm import AsyncLLMEngine, AsyncEngineArgs, SamplingParams
+from transformers import AutoTokenizer
+import threadingc
+import queue
 from .decoder import tokens_decoder_sync
-import os
-import sys
-from ..utils import is_colab
 
 class OrpheusModel:
     def __init__(self, model_name, dtype=torch.bfloat16):
         self.model_name = self._map_model_params(model_name)
         self.dtype = dtype
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        token = os.environ.get("HF_TOKEN")
-        if not token:
-            if is_colab():
-                from google.colab import userdata
-                os.environ["HF_TOKEN"] = userdata.get("HF_TOKEN")
-                token = os.environ.get("HF_TOKEN")
-                if not token:
-                    print("HF_TOKEN is required but not found. Please set it as an environment variable.")
-            else:
-                print("HF_TOKEN is required but not found. Please set it as an environment variable.")
-                sys.exit(1)
-            
-        self.tokenizer = AutoTokenizer.from_pretrained(self.model_name)
-        self.model = AutoModelForCausalLM.from_pretrained(self.model_name, torch_dtype=self.dtype).to(self.device)
-        self.available_voices = ["zoe", "zac", "jess", "leo", "mia", "julia", "leah"]
+        self.engine = self._setup_engine()
+        self.available_voices = ["zoe", "zac","jess", "leo", "mia", "julia", "leah"]
+        self.tokeniser = AutoTokenizer.from_pretrained(model_name)
 
+    
     def _map_model_params(self, model_name):
         model_map = {
-            "medium-3b": {
+            # "nano-150m":{
+            #     "repo_id": "canopylabs/orpheus-tts-0.1-finetune-prod",
+            # }, 
+            # "micro-400m":{
+            #     "repo_id": "canopylabs/orpheus-tts-0.1-finetune-prod",
+            # }, 
+            # "small-1b":{
+            #     "repo_id": "canopylabs/orpheus-tts-0.1-finetune-prod",
+            # },
+            "medium-3b":{
                 "repo_id": "canopylabs/orpheus-tts-0.1-finetune-prod",
             },
         }
         unsupported_models = ["nano-150m", "micro-400m", "small-1b"]
-        if model_name in unsupported_models:
+        if (model_name  in unsupported_models):
             raise ValueError(f"Model {model_name} is not supported. Only medium-3b is supported, small, micro and nano models will be released very soon")
         elif model_name in model_map:
-            return model_map[model_name]["repo_id"]
+            return model_name[model_name]["repo_id"]
         else:
             return model_name
-
+        
+    def _setup_engine(self):
+        engine_args = AsyncEngineArgs(
+            model=self.model_name,
+            dtype=self.dtype,
+        )
+        return AsyncLLMEngine.from_engine_args(engine_args)
+    
     def validate_voice(self, voice):
-        if voice and voice not in self.available_voices:
-            raise ValueError(f"Voice {voice} is not available for model {self.model_name}")
-
+        if voice:
+            if voice not in self.engine.available_voices:
+                raise ValueError(f"Voice {voice} is not available for model {self.model_name}")
+    
     def _format_prompt(self, prompt, voice="tara", model_type="larger"):
         if model_type == "smaller":
             if voice:
@@ -53,45 +59,57 @@ class OrpheusModel:
         else:
             if voice:
                 adapted_prompt = f"{voice}: {prompt}"
-                prompt_tokens = self.tokenizer(adapted_prompt, return_tensors="pt").input_ids
-                start_token = torch.tensor([[128259]], dtype=torch.int64)
+                prompt_tokens = self.tokeniser(adapted_prompt, return_tensors="pt")
+                start_token = torch.tensor([[ 128259]], dtype=torch.int64)
                 end_tokens = torch.tensor([[128009, 128260, 128261, 128257]], dtype=torch.int64)
-                all_input_ids = torch.cat([start_token, prompt_tokens, end_tokens], dim=1)
-                prompt_string = self.tokenizer.decode(all_input_ids[0])
+                all_input_ids = torch.cat([start_token, prompt_tokens.input_ids, end_tokens], dim=1)
+                prompt_string = self.tokeniser.decode(all_input_ids[0])
                 return prompt_string
             else:
-                prompt_tokens = self.tokenizer(prompt, return_tensors="pt").input_ids
-                start_token = torch.tensor([[128259]], dtype=torch.int64)
+                prompt_tokens = self.tokeniser(prompt, return_tensors="pt")
+                start_token = torch.tensor([[ 128259]], dtype=torch.int64)
                 end_tokens = torch.tensor([[128009, 128260, 128261, 128257]], dtype=torch.int64)
-                all_input_ids = torch.cat([start_token, prompt_tokens, end_tokens], dim=1)
-                prompt_string = self.tokenizer.decode(all_input_ids[0])
+                all_input_ids = torch.cat([start_token, prompt_tokens.input_ids, end_tokens], dim=1)
+                prompt_string = self.tokeniser.decode(all_input_ids[0])
                 return prompt_string
 
-    def generate_tokens_sync(self, prompt, voice=None, request_id="req-001", temperature=0.6, top_p=0.8, 
-                            max_tokens=1200, stop_token_ids=[49158], repetition_penalty=1.3):
+ 
+
+
+    def generate_tokens_sync(self, prompt, voice=None, request_id="req-001", temperature=0.6, top_p=0.8, max_tokens=1200, stop_token_ids = [49158], repetition_penalty=1.3):
         prompt_string = self._format_prompt(prompt, voice)
         print(prompt)
+        sampling_params = SamplingParams(
+        temperature=temperature,
+        top_p=top_p,
+        max_tokens=max_tokens,  # Adjust max_tokens as needed.
+        stop_token_ids = stop_token_ids, 
+        repetition_penalty=repetition_penalty, 
+        )
 
-        # Tokenize the prompt
-        input_ids = self.tokenizer(prompt_string, return_tensors="pt").input_ids.to(self.device)
+        token_queue = queue.Queue()
 
-        # Generate tokens using the model
-        with torch.no_grad():
-            outputs = self.model.generate(
-                input_ids=input_ids,
-                max_length=max_tokens,
-                temperature=temperature,
-                top_p=top_p,
-                repetition_penalty=repetition_penalty,
-                do_sample=True,
-                eos_token_id=stop_token_ids,
-                pad_token_id=self.tokenizer.eos_token_id if self.tokenizer.eos_token_id else stop_token_ids[0]
-            )
+        async def async_producer():
+            async for result in self.engine.generate(prompt=prompt_string, sampling_params=sampling_params, request_id=request_id):
+                # Place each token text into the queue.
+                token_queue.put(result.outputs[0].text)
+            token_queue.put(None)  # Sentinel to indicate completion.
 
-        # Decode the generated tokens incrementally (simulating streaming)
-        generated_text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
-        for token in generated_text.split():  # Simple tokenization for yielding
+        def run_async():
+            asyncio.run(async_producer())
+
+        thread = threading.Thread(target=run_async)
+        thread.start()
+
+        while True:
+            token = token_queue.get()
+            if token is None:
+                break
             yield token
 
+        thread.join()
+    
     def generate_speech(self, **kwargs):
         return tokens_decoder_sync(self.generate_tokens_sync(**kwargs))
+
+
