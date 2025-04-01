@@ -2,7 +2,7 @@ import asyncio
 import torch
 from vllm import AsyncLLMEngine, AsyncEngineArgs, SamplingParams
 from transformers import AutoTokenizer
-import threadingc
+import threading
 import queue
 from .decoder import tokens_decoder_sync
 
