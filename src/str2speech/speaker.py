@@ -1,13 +1,3 @@
-from .kokoro_tts import KokoroTTS
-from .bark_tts import BarkTTS
-from .sesame_tts import SesameTTS
-from .mms_tts import MMSTTS
-from .zonos_tts import ZonosTTS
-from .spark_tts import SparkTTS
-from .speecht5_tts import SpeechT5TTS
-from .orpheus_tts import OrpheusTTS
-
-
 class Speaker:
     def __init__(self, tts_model: str = None):
         if tts_model:
@@ -24,28 +14,35 @@ class Speaker:
 
         self.tts_model = tts_model
         if "bark" in tts_model:
+            from .bark_tts import BarkTTS
             self.model = BarkTTS(tts_model)
         elif "mms-tts" in tts_model:
+            from .mms_tts import MMSTTS
             self.model = MMSTTS(tts_model)
         elif "zonos" in tts_model:
+            from .zonos_tts import ZonosTTS
             self.model = ZonosTTS()
         elif "kokoro" in tts_model:
+            from .kokoro_tts import KokoroTTS
             self.model = KokoroTTS()
         elif "sesame" in tts_model:
+            from .sesame_tts import SesameTTS
             self.model = SesameTTS()
         elif "spark" in tts_model:
+            from .spark_tts import SparkTTS
             self.model = SparkTTS()
         elif "speecht5" in tts_model:
+            from .speecht5_tts import SpeechT5TTS
             self.model = SpeechT5TTS()
         elif "orpheus" in tts_model:
+            from .orpheus_tts import OrpheusTTS
             self.model = OrpheusTTS()
 
     def text_to_speech(self, text: str, output_file: str, voice_preset: str = None, speed: float = 1.0):
         if "bark" in self.tts_model or "kokoro" in self.tts_model:
             if voice_preset:
                 self.model.voice_preset = voice_preset
-            if type(self.model) == KokoroTTS:
-                self.model.speed = speed
+            self.model.speed = float(speed)
             self.model.generate(text, output_file)
         elif (
             "mms-tts" in self.tts_model

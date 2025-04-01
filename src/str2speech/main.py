@@ -78,6 +78,8 @@ def main():
         if(speed):
             speed = float(speed)
             print(f"Using speed: {speed}")
+        else:
+            speed = 1.0
         s.text_to_speech(text, output, args.voice, speed)
         end_time = time.time()
         print(f"Generated speech in {end_time - start_time:.2f} seconds.")

@@ -23,7 +23,7 @@ setup(
         "scipy>=1.13.1",
         "accelerate",
         "numpy==1.26.4",
-        "kokoro>=0.8.4",
+        "kokoro==0.8.4",
         "soundfile",
         "gitpython",
         "moshi",
