@@ -39,6 +39,8 @@ class Speaker:
         if "bark" in self.tts_model or "kokoro" in self.tts_model:
             if voice_preset:
                 self.model.voice_preset = voice_preset
+                if "kokoro" in self.tts_model:
+                    self.model.change_voice()
             self.model.speed = float(speed)
             self.model.generate(text, output_file)
         elif (
