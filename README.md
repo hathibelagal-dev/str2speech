@@ -1,5 +1,9 @@
 # 👉 str2speech
 
+![PyPI - Version](https://img.shields.io/pypi/v/str2speech)
+![Pepy Total Downloads](https://img.shields.io/pepy/dt/str2speech)
+![PyPI - License](https://img.shields.io/pypi/l/str2speech)
+
 ## Overview
 `str2speech` is a simple command-line tool for converting text to speech using Transformer-based text-to-speech (TTS) models. It supports multiple models and voice presets, allowing users to generate high-quality speech audio from text.
 
