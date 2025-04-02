@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 setup(
     name="str2speech",
-    version="0.3.4",
+    version="0.3.5",
     author="Ashraff Hathibelagal",
     description="A powerful, Transformer-based text-to-speech (TTS) tool.",
     long_description=long_description,

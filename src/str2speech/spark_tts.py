@@ -42,4 +42,4 @@ class SparkTTS(BaseTTS):
 
     def generate(self, prompt, output_file):
         command = ["sparktts", "--text", prompt, "--save_file", output_file, "--model_dir", self.model_dir]
-        subprocess.run(command, shell=True)
+        subprocess.run(command)
