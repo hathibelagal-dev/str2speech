@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 setup(
     name="str2speech",
-    version="0.3.6",
+    version="0.3.7",
     author="Ashraff Hathibelagal",
     description="A powerful, Transformer-based text-to-speech (TTS) tool.",
     long_description=long_description,
@@ -35,6 +35,12 @@ setup(
         "einx==0.3.0",
         "requests",
         "snac>=1.2.1",
+        "attrdict",
+        "librosa==0.10.2.post1",
+        "pydub==0.25.1",
+        "pyloudnorm==0.1.1",
+        "x-transformers==2.1.37",
+        "openai-whisper==20240930"
     ],
     entry_points={
         "console_scripts": [
@@ -52,5 +58,5 @@ setup(
     project_urls={
         "Source": "https://github.com/hathibelagal-dev/str2speech",
         "Tracker": "https://github.com/hathibelagal-dev/str2speech/issues",
-    },
+    }
 )
