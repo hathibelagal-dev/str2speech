@@ -243,16 +243,8 @@ class MegaTTS3DiTInfer():
             return to_wav_bytes(wav_pred, self.sr)
 
 
-def generate():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--input_wav', type=str)
-    parser.add_argument('--input_text', type=str)
-    parser.add_argument('--output_dir', type=str)
-    parser.add_argument('--time_step', type=int, default=32, help='Inference steps of Diffusion Transformer')
-    parser.add_argument('--p_w', type=float, default=1.6, help='Intelligibility Weight')
-    parser.add_argument('--t_w', type=float, default=2.5, help='Similarity Weight')
-    args = parser.parse_args()
-    wav_path, input_text, out_path, time_step, p_w, t_w = args.input_wav, args.input_text, args.output_dir, args.time_step, args.p_w, args.t_w
+def generate(input_text, wav_path):    
+    time_step, p_w, t_w = 32, 1.6, 2.5
 
     infer_ins = MegaTTS3DiTInfer()
 
@@ -265,6 +257,3 @@ def generate():
 
     print(f"| Saving results to output.wav")
     save_wav(wav_bytes, f'output.wav')
-
-if __name__ == '__main__':
-    generate()
