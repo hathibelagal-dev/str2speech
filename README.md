@@ -90,13 +90,14 @@ The following models are supported:
 - `SparkAudio/Spark-TTS-0.5B`
 - `Zyphra/Zonos-v0.1-transformer`
 - `microsoft/speecht5_tts`
-- `Kokoro`
-- `suno/bark-small` (default)
+- `Kokoro` (English and Spanish only)
+- `suno/bark-small` (default TTS model)
 - `suno/bark`
-- `facebook/mms-tts-eng`
-- `facebook/mms-tts-deu`
-- `facebook/mms-tts-fra`
-- `facebook/mms-tts-spa`
+- `facebook/mms-tts-eng` (English only)
+- `facebook/mms-tts-deu` (German only)
+- `facebook/mms-tts-fra` (French only)
+- `facebook/mms-tts-spa` (Spanish only)
+- `facebook/mms-tts-swe` (Swedish only)
 
 ## Installation
 

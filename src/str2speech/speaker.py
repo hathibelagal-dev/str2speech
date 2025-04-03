@@ -65,6 +65,7 @@ class Speaker:
             {"name": "facebook/mms-tts-deu"},
             {"name": "facebook/mms-tts-fra"},
             {"name": "facebook/mms-tts-spa"},
+            {"name": "facebook/mms-tts-swe"},
             {"name": "kokoro"},
             {"name": "sesame/csm-1b"},
             {"name": "zyphra/zonos-v0.1-transformer"},
