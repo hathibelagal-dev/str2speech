@@ -14,7 +14,6 @@
 
 import json
 import os
-import argparse
 import librosa
 import numpy as np
 import torch
@@ -32,7 +31,7 @@ from .utils.text_utils.split_text import chunk_text_english
 from .utils.commons.hparams import hparams, set_hparams
 
 from str2speech.utils import get_downloads_path
-
+from huggingface_hub import snapshot_download
 
 if "TOKENIZERS_PARALLELISM" not in os.environ:
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
@@ -243,7 +242,9 @@ class MegaTTS3DiTInfer():
             return to_wav_bytes(wav_pred, self.sr)
 
 
-def generate(input_text, wav_path):    
+def generate(input_text, wav_path):
+    megatts_path = get_downloads_path("megatts3")
+    snapshot_download(repo_id="ByteDance/MegaTTS3", local_dir=megatts_path)
     time_step, p_w, t_w = 32, 1.6, 2.5
 
     infer_ins = MegaTTS3DiTInfer(ckpt_root=get_downloads_path("megatts3"))
