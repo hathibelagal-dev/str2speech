@@ -142,7 +142,7 @@ class MegaTTS3DiTInfer():
 
         ''' Wav VAE '''
         self.hp_wavvae = hp_wavvae = set_hparams(f'{self.wavvae_exp_name}/config.yaml', global_hparams=False)
-        from tts.modules.wavvae.decoder.wavvae_v3 import WavVAE_V3
+        from .modules.wavvae.decoder.wavvae_v3 import WavVAE_V3
         self.wavvae = WavVAE_V3(hparams=hp_wavvae)
         if os.path.exists(f'{self.wavvae_exp_name}/model_only_last.ckpt'):
             load_ckpt(self.wavvae, f'{self.wavvae_exp_name}/model_only_last.ckpt', 'model_gen', strict=True)
