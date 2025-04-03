@@ -58,5 +58,5 @@ setup(
     project_urls={
         "Source": "https://github.com/hathibelagal-dev/str2speech",
         "Tracker": "https://github.com/hathibelagal-dev/str2speech/issues",
-    },
+    }
 )

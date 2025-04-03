@@ -242,7 +242,7 @@ class MegaTTS3DiTInfer():
             return to_wav_bytes(wav_pred, self.sr)
 
 
-def generate(input_text, wav_path):
+def generate(input_text, wav_path, output_file):
     megatts_path = get_downloads_path("megatts3")
     snapshot_download(repo_id="ByteDance/MegaTTS3", local_dir=megatts_path)
     time_step, p_w, t_w = 32, 1.6, 2.5
@@ -257,4 +257,4 @@ def generate(input_text, wav_path):
     wav_bytes = infer_ins.forward(resource_context, input_text, time_step=time_step, p_w=p_w, t_w=t_w)
 
     print(f"| Saving results to output.wav")
-    save_wav(wav_bytes, f'output.wav')
+    save_wav(wav_bytes, output_file)

@@ -34,6 +34,9 @@ class Speaker:
         elif "speecht5" in tts_model:
             from .speecht5_tts import SpeechT5TTS
             self.model = SpeechT5TTS()
+        elif "megatts3" in tts_model:
+            from .mega3_tts import Mega3TTS
+            self.model = Mega3TTS()
 
     def text_to_speech(self, text: str, output_file: str, voice_preset: str = None, speed: float = 1.0):
         if "bark" in self.tts_model or "kokoro" in self.tts_model:
@@ -49,6 +52,7 @@ class Speaker:
             or "sesame" in self.tts_model
             or "spark" in self.tts_model
             or "speecht5" in self.tts_model
+            or "megatts3" in self.tts_model
         ):
             if voice_preset:
                 print(
@@ -61,6 +65,7 @@ class Speaker:
         return [
             {"name": "suno/bark-small"},
             {"name": "suno/bark"},
+            {"name": "megatts3"},
             {"name": "facebook/mms-tts-eng"},
             {"name": "facebook/mms-tts-deu"},
             {"name": "facebook/mms-tts-fra"},
