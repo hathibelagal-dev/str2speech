@@ -16,8 +16,8 @@ import math
 import torch
 from torch import nn
 from torch.nn import Parameter, Linear
-from tts.modules.ar_dur.commons.layers import LayerNorm, Embedding
-from tts.modules.ar_dur.commons.seq_utils import get_incremental_state, set_incremental_state, softmax, make_positions
+from .layers import LayerNorm, Embedding
+from .seq_utils import get_incremental_state, set_incremental_state, softmax, make_positions
 import torch.nn.functional as F
 
 DEFAULT_MAX_SOURCE_POSITIONS = 3000

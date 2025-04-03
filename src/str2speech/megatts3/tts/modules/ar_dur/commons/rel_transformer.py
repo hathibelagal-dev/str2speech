@@ -17,7 +17,7 @@ import torch
 from torch import nn
 from torch.nn import functional as F
 
-from tts.modules.ar_dur.commons.layers import Embedding
+from .layers import Embedding
 
 
 def convert_pad_shape(pad_shape):
