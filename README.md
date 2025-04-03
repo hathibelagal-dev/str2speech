@@ -9,6 +9,16 @@
 
 ## Latest
 
+We just added support for ByteDance's MegaTTS3. Here's how easy it is to use it:
+
+```
+str2speech --model megatts3 --text "This is awesome!"
+```
+
+Works fine with just a CPU (needs about 10GB of RAM). But it's always better if you have CUDA available.
+
+---
+
 We now support Microsoft's Speech T5. This is a very lightweight model, and sounds pretty good. Try it out with this:
 
 ```bash
@@ -87,6 +97,7 @@ cd Zonos && pip install -e .
 
 The following models are supported:
 - `Sesame/CSM-1B`
+- `MegaTTS3`
 - `SparkAudio/Spark-TTS-0.5B`
 - `Zyphra/Zonos-v0.1-transformer`
 - `microsoft/speecht5_tts`

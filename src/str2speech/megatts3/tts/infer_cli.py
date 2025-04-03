@@ -253,5 +253,5 @@ def generate(input_text, wav_path, output_file):
     resource_context = infer_ins.preprocess(file_content, latent_file=wav_path.replace('.wav', '.npy'))
     wav_bytes = infer_ins.forward(resource_context, input_text, time_step=time_step, p_w=p_w, t_w=t_w)
 
-    print(f"| Saving results to output.wav")
+    print(f"Saving results to {output_file}")
     save_wav(wav_bytes, output_file)
