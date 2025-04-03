@@ -17,9 +17,9 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 
-from tts.modules.wavvae.decoder.seanet_encoder import Encoder
-from tts.modules.wavvae.decoder.diag_gaussian import DiagonalGaussianDistribution
-from tts.modules.wavvae.decoder.hifigan_modules import Generator, Upsample
+from .seanet_encoder import Encoder
+from .diag_gaussian import DiagonalGaussianDistribution
+from .hifigan_modules import Generator, Upsample
 
 
 class WavVAE_V3(nn.Module):

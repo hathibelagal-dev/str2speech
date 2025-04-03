@@ -21,11 +21,11 @@ from torch import nn
 from torch.nn import Linear
 from tqdm import tqdm
 
-from tts.modules.ar_dur.commons.layers import Embedding, LayerNorm
-from tts.modules.ar_dur.commons.nar_tts_modules import PosEmb
-from tts.modules.ar_dur.commons.rot_transformer import RotTransformerDecoderLayer
-from tts.modules.ar_dur.commons.transformer import SinusoidalPositionalEmbedding
-from tts.modules.ar_dur.commons.rel_transformer import RelTransformerEncoder
+from .commons.layers import Embedding, LayerNorm
+from .commons.nar_tts_modules import PosEmb
+from .commons.rot_transformer import RotTransformerDecoderLayer
+from .commons.transformer import SinusoidalPositionalEmbedding
+from .commons.rel_transformer import RelTransformerEncoder
 
 FS_ENCODERS = {
     'rel_fft': lambda hp, dict_size: RelTransformerEncoder(

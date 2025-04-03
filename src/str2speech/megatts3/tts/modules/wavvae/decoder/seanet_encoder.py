@@ -16,7 +16,7 @@ from typing import List
 
 import torch
 from torch import nn
-from tts.modules.wavvae.encoder.common_modules.seanet import SEANetEncoder
+from ..encoder.common_modules.seanet import SEANetEncoder
 
 class Encoder(nn.Module):
     def __init__(

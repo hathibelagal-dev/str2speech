@@ -15,13 +15,13 @@
 import torch
 from torch import nn
 
-from tts.modules.llm_dit.cfm import ConditionalFlowMatcher
-from tts.modules.ar_dur.commons.layers import Embedding
-from tts.modules.ar_dur.commons.nar_tts_modules import PosEmb
-from tts.modules.ar_dur.commons.rel_transformer import RelTransformerEncoder
-from tts.modules.ar_dur.ar_dur_predictor import expand_states
-from tts.modules.llm_dit.transformer import Transformer
-from tts.modules.llm_dit.time_embedding import TimestepEmbedding
+from .cfm import ConditionalFlowMatcher
+from ..ar_dur.commons.layers import Embedding
+from ..ar_dur.commons.nar_tts_modules import PosEmb
+from ..ar_dur.commons.rel_transformer import RelTransformerEncoder
+from ..ar_dur.ar_dur_predictor import expand_states
+from .transformer import Transformer
+from .time_embedding import TimestepEmbedding
 
 
 class Diffusion(nn.Module):
