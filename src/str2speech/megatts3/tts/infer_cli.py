@@ -102,7 +102,7 @@ class MegaTTS3DiTInfer():
         ph_dict_size = len(token_encoder)
 
         ''' Load Duration LM '''
-        from tts.modules.ar_dur.ar_dur_predictor import ARDurPredictor
+        from .modules.ar_dur.ar_dur_predictor import ARDurPredictor
         hp_dur_model = self.hp_dur_model = set_hparams(f'{self.dur_exp_name}/config.yaml', global_hparams=False)
         hp_dur_model['frames_multiple'] = hparams['frames_multiple']
         self.dur_model = ARDurPredictor(
@@ -116,7 +116,7 @@ class MegaTTS3DiTInfer():
         self.dur_model.to(device)
 
         ''' Load Diffusion Transformer '''
-        from tts.modules.llm_dit.dit import Diffusion
+        from .modules.llm_dit.dit import Diffusion
         self.dit = Diffusion()
         load_ckpt(self.dit, f'{self.dit_exp_name}', 'dit', strict=False)
         self.dit.eval()
@@ -125,7 +125,7 @@ class MegaTTS3DiTInfer():
         self.cfg_mask_token_tone = 32 - 1
 
         ''' Load Frontend LM '''
-        from tts.modules.aligner.whisper_small import Whisper
+        from .modules.aligner.whisper_small import Whisper
         self.aligner_lm = Whisper()
         load_ckpt(self.aligner_lm, f'{self.frontend_exp_name}', 'model')
         self.aligner_lm.eval()
