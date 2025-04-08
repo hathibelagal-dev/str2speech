@@ -61,9 +61,9 @@ This is probably the easiest way to use Kokoro TTS.
 Added support for Zyphra Zonos. Try this out:
 
 ```bash
-str2speech --text "Hello again" \
+str2speech --text "Hello from Zonos" \
     --model "Zyphra/Zonos-v0.1-transformer" \
-    --output helloagain.wav
+    --output hellozonos.wav
 ```
 
 Alternatively, you could write Python code to use it:
@@ -75,19 +75,14 @@ speaker = Speaker("Zyphra/Zonos-v0.1-transformer")
 speaker.text_to_speech("Hello, this is a test!", "output.wav")
 ```
 
-`str2speech` will try to install Zonos if it doesn't detect it
-on your system. You might still have to install `espeak-ng` manually.
+You might need to install `espeak`. Here's how you can install it:
 
-If you choose to install Zonos yourself, please run the following:
-
-```bash
-apt install espeak-ng
-git clone https://github.com/hathibelagal-dev/Zonos.git
-cd Zonos && pip install -e .
+```
+sudo apt install espeak-ng
 ```
 
 ## Features
-- Supports multiple TTS models, including `suno/bark-small`, `suno/bark`, and various `facebook/mms-tts` models.
+- Supports multiple TTS models, including `Sesame/CSM-1B`, `SparkAudio/Spark-TTS-0.5B`, `Kokoro`, and various `facebook/mms-tts` models.
 - Allows selection of voice presets.
 - Supports text input via command-line arguments or files.
 - Outputs speech in `.wav` format.
