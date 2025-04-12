@@ -13,6 +13,8 @@ class SparkTTS(BaseTTS):
     def __init__(self):
         super().__init__()
         self.download_model()
+        self.voice_preset = None
+        self.voice_text = None
 
     def download_model(self):
         self.model_dir = get_downloads_path("SparkTTS")
