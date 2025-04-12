@@ -28,5 +28,5 @@ class SesameTTS(BaseTTS):
         torchaudio.save(output_file, audio.unsqueeze(0).cpu(), self.sample_rate)
         print("Audio saved.")
 
-    def clone(self, clone_voice):
+    def clone(self, clone_voice, voice_text):
         pass

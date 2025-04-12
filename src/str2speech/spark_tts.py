@@ -61,4 +61,4 @@ class SparkTTS(BaseTTS):
         else:
             self.voice_preset = clone_voice
             self.voice_text = voice_text
-            print("Cloning voice...")        
+            print("Cloning voice...")

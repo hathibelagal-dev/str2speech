@@ -13,7 +13,7 @@ class MMSTTS(BaseTTS):
         self.tokenizer = VitsTokenizer.from_pretrained(model_name)
         self.sample_rate = 16000
 
-    def clone(self, clone_voice):
+    def clone(self, clone_voice, voice_text):
         print("Cloning voice is not supported in MMS TTS.")
 
     def generate(self, prompt, output_file):

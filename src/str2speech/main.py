@@ -38,7 +38,7 @@ def main():
     parser.add_argument(
         "--clone",
         "-c",
-        help="The name of the voice to clone. If not provided, the default voice will be used.",
+        help="The filename of the voice to clone.",
     )
     
     parser.add_argument(

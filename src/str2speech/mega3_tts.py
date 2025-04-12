@@ -30,7 +30,7 @@ class Mega3TTS(BaseTTS):
                     f.write(response.content)
                     print("Default voice asset 2 downloaded") 
 
-    def clone(self, clone_voice):
+    def clone(self, clone_voice, voice_text):
         pass       
 
     def generate(self, prompt, output_file):

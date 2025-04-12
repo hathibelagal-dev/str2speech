@@ -17,6 +17,6 @@ class SpeechT5TTS(BaseTTS):
         self.sample_rate = speech["sampling_rate"]
         print(f"Audio saved to {output_file}")
 
-    def clone(self, clone_voice):
+    def clone(self, clone_voice, voice_text):
         pass
         

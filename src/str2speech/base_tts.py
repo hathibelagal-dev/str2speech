@@ -11,5 +11,5 @@ class BaseTTS(ABC):
         pass
 
     @abstractmethod
-    def clone(self, clone_voice):
+    def clone(self, clone_voice, voice_text):
         pass

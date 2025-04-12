@@ -24,5 +24,5 @@ class ZonosTTS(BaseTTS):
             wav.write(f, self.sample_rate, audio_array)
             print("Audio saved.")
 
-    def clone(self, clone_voice):
+    def clone(self, clone_voice, voice_text):
         pass
