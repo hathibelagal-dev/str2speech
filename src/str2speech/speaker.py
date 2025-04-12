@@ -38,7 +38,7 @@ class Speaker:
             from .mega3_tts import Mega3TTS
             self.model = Mega3TTS()
 
-    def text_to_speech(self, text: str, output_file: str, voice_preset: str = None, speed: float = 1.0, voice_text: str = None, clone_voice: str = None):
+    def text_to_speech(self, text: str, output_file: str, voice_preset: str = None, speed: float = 1.0, clone_voice: str = None, voice_text: str = None):
         self.model.clone(clone_voice, voice_text)
         if "bark" in self.tts_model or "kokoro" in self.tts_model:
             if voice_preset:
