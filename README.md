@@ -83,6 +83,7 @@ sudo apt install espeak-ng
 
 ## Features
 - Supports multiple TTS models, including `Sesame/CSM-1B`, `SparkAudio/Spark-TTS-0.5B`, `Kokoro`, and various `facebook/mms-tts` models.
+- Supports voice cloning with Spark-TTS and Zyphra Zonos.
 - Allows selection of voice presets.
 - Supports text input via command-line arguments or files.
 - Outputs speech in `.wav` format.
@@ -129,10 +130,19 @@ str2speech --text "Hello, world!" --output hello.wav
 - `--output` (`-o`): The output `.wav` file name (optional, defaults to `output.wav`).
 - `--model` (`-m`): The TTS model to use (optional, defaults to `suno/bark-small`).
 - `--speed` (`-s`): The speed of the speech (optional, defaults to 1.0). Supported only by Kokoro TTS currently.
+- `--clone` (`-c`): The filename of a wav file that contains the voice to clone.
+- `--clone-voice-text` (`-p`): The transcript of what's being said in the wav file provided.
 
 Example:
 ```sh
 str2speech --file input.txt --output speech.wav --model suno/bark
+```
+
+Example 2:
+```sh
+str2speech --text "This is my cloned voice" \
+        --model zyphra/zonos-v0.1-transformer \
+        --output clonetest.wav --clone "./lex.wav"
 ```
 
 ## API Usage
