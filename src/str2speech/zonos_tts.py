@@ -4,6 +4,7 @@ import scipy.io.wavfile as wav
 from .zonos.model import Zonos
 from .zonos.conditioning import make_cond_dict
 import torchaudio
+import os
 
 class ZonosTTS(BaseTTS):
     model_name = "zyphra/zonos-v0.1-transformer"
