@@ -55,6 +55,8 @@ class SparkTTS(BaseTTS):
         subprocess.run(command)
 
     def clone(self, clone_voice, voice_text):
+        if not clone_voice:
+            return
         if not voice_text:
             print("Cloning voice failed. No transcript provided. Use the --clone-voice-text argument.")
             return

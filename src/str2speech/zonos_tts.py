@@ -13,6 +13,8 @@ class ZonosTTS(BaseTTS):
         super().__init__()
         self.model = Zonos.from_pretrained(self.model_name, device=self.device)
         self.sample_rate = getattr(self.model.autoencoder, "sampling_rate", 44100)
+        self.voice_preset = None
+        self.voice_text = None
 
     def generate(self, prompt, output_file):
         if not self.voice_preset:
@@ -24,14 +26,20 @@ class ZonosTTS(BaseTTS):
         conditioning = self.model.prepare_conditioning(cond_dict)
         with torch.no_grad():
             codes = self.model.generate(conditioning)
-            audio_array = self.model.autoencoder.decode(codes).cpu()[0]
-
-        audio_array = audio_array.cpu().numpy().squeeze()
-        with open(output_file, "wb") as f:
-            wav.write(f, self.sample_rate, audio_array)
-            print("Audio saved.")
+            if not self.voice_preset:
+                audio_array = self.model.autoencoder.decode(codes).cpu()[0]
+                audio_array = audio_array.cpu().numpy().squeeze()
+                with open(output_file, "wb") as f:
+                    wav.write(f, self.sample_rate, audio_array)
+                    print("Audio saved.")
+            else:
+                wavs = self.model.autoencoder.decode(codes).cpu()
+                torchaudio.save(output_file, wavs[0], self.model.autoencoder.sampling_rate)
+                print("Audio saved.")
 
     def clone(self, clone_voice, voice_text):
+        if not clone_voice:            
+            return
         if not os.path.exists(clone_voice):
             print("Cloning voice failed. File not found.")
             return
