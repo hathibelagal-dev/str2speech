@@ -3,6 +3,7 @@ import torch
 import scipy.io.wavfile as wav
 from .zonos.model import Zonos
 from .zonos.conditioning import make_cond_dict
+import torchaudio
 
 class ZonosTTS(BaseTTS):
     model_name = "zyphra/zonos-v0.1-transformer"
@@ -12,8 +13,13 @@ class ZonosTTS(BaseTTS):
         self.model = Zonos.from_pretrained(self.model_name, device=self.device)
         self.sample_rate = getattr(self.model.autoencoder, "sampling_rate", 44100)
 
-    def generate(self, prompt, output_file):        
-        cond_dict = make_cond_dict(text=prompt, language="en-us")
+    def generate(self, prompt, output_file):
+        if not self.clone_voice:
+            cond_dict = make_cond_dict(text=prompt, language="en-us")
+        else:
+            wav, sampling_rate = torchaudio.load(self.clone_voice)
+            speaker = self.model.make_speaker_embedding(wav, sampling_rate)
+            cond_dict = make_cond_dict(text=prompt, speaker=speaker, language="en-us")
         conditioning = self.model.prepare_conditioning(cond_dict)
         with torch.no_grad():
             codes = self.model.generate(conditioning)
@@ -25,4 +31,10 @@ class ZonosTTS(BaseTTS):
             print("Audio saved.")
 
     def clone(self, clone_voice, voice_text):
-        pass
+        if not os.path.exists(clone_voice):
+            print("Cloning voice failed. File not found.")
+            return
+        else:
+            self.voice_preset = clone_voice
+            self.voice_text = voice_text
+            print("Cloning voice...")

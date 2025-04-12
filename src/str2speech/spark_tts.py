@@ -56,7 +56,7 @@ class SparkTTS(BaseTTS):
 
     def clone(self, clone_voice, voice_text):
         if not voice_text:
-            print("Cloning voice failed. No transcript provided.")
+            print("Cloning voice failed. No transcript provided. Use the --clone-voice-text argument.")
             return
         if not os.path.exists(clone_voice):
             print("Cloning voice failed. File not found.")
