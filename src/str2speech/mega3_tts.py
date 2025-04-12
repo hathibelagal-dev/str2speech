@@ -28,7 +28,10 @@ class Mega3TTS(BaseTTS):
                     os.path.join(self.model_dir, "voices", "megatts_p.npy"), "wb"
                 ) as f:
                     f.write(response.content)
-                    print("Default voice asset 2 downloaded")        
+                    print("Default voice asset 2 downloaded") 
+
+    def clone(self, clone_voice):
+        pass       
 
     def generate(self, prompt, output_file):
         G(

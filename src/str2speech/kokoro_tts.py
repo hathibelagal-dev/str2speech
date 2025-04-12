@@ -13,6 +13,9 @@ class KokoroTTS(BaseTTS):
         "bm_daniel", "bm_fable", "bm_george", "bm_lewis"
     ]
 
+    def clone(self, clone_voice):
+        print("Cloning voice is not supported in Kokoro TTS.")        
+
     def __init__(self, voice_preset: str = "af_heart"):
         super().__init__()        
         self.pipeline = KPipeline(

@@ -41,5 +41,24 @@ class SparkTTS(BaseTTS):
                 print("No installation.")
 
     def generate(self, prompt, output_file):
-        command = ["sparktts", "--text", prompt, "--save_file", output_file, "--model_dir", self.model_dir]
+        if self.voice_preset is None:
+            command = ["sparktts", "--text", prompt, "--save_file", output_file, "--model_dir", self.model_dir]
+        else:
+            command = [
+                "sparktts", "--text", prompt, "--save_file",
+                output_file, "--model_dir", self.model_dir,
+                "--prompt_speech_path", self.voice_preset,
+                "--prompt_text", self.voice_text]
         subprocess.run(command)
+
+    def clone(self, clone_voice, voice_text):
+        if not voice_text:
+            print("Cloning voice failed. No transcript provided.")
+            return
+        if not os.path.exists(clone_voice):
+            print("Cloning voice failed. File not found.")
+            return
+        else:
+            self.voice_preset = clone_voice
+            self.voice_text = voice_text
+            print("Cloning voice...")        
