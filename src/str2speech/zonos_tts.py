@@ -20,8 +20,8 @@ class ZonosTTS(BaseTTS):
         if not self.voice_preset:
             cond_dict = make_cond_dict(text=prompt, language="en-us")
         else:
-            wav, sampling_rate = torchaudio.load(self.voice_preset)
-            speaker = self.model.make_speaker_embedding(wav, sampling_rate)
+            _wav, sampling_rate = torchaudio.load(self.voice_preset)
+            speaker = self.model.make_speaker_embedding(_wav, sampling_rate)
             cond_dict = make_cond_dict(text=prompt, speaker=speaker, language="en-us")
         conditioning = self.model.prepare_conditioning(cond_dict)
         with torch.no_grad():
