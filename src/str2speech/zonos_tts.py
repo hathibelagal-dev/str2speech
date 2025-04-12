@@ -15,7 +15,7 @@ class ZonosTTS(BaseTTS):
         self.sample_rate = getattr(self.model.autoencoder, "sampling_rate", 44100)
 
     def generate(self, prompt, output_file):
-        if not self.clone_voice:
+        if not self.voice_preset:
             cond_dict = make_cond_dict(text=prompt, language="en-us")
         else:
             wav, sampling_rate = torchaudio.load(self.voice_preset)
