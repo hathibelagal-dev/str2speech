@@ -47,8 +47,9 @@ class SparkTTS(BaseTTS):
             command = ["sparktts", "--text", prompt, "--save_file", output_file, "--model_dir", self.model_dir]
         else:
             command = [
-                "sparktts", "--text", prompt, "--save_file",
-                output_file, "--model_dir", self.model_dir,
+                "sparktts", "--text", prompt,
+                "--save_file", output_file,
+                "--model_dir", self.model_dir,
                 "--prompt_speech_path", self.voice_preset,
                 "--prompt_text", self.voice_text]
         subprocess.run(command)

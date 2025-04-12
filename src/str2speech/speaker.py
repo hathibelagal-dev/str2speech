@@ -39,13 +39,13 @@ class Speaker:
             self.model = Mega3TTS()
 
     def text_to_speech(self, text: str, output_file: str, voice_preset: str = None, speed: float = 1.0, voice_text: str = None, clone_voice: str = None):
+        self.model.clone(clone_voice, voice_text)
         if "bark" in self.tts_model or "kokoro" in self.tts_model:
             if voice_preset:
                 self.model.voice_preset = voice_preset
                 if "kokoro" in self.tts_model:
                     self.model.change_voice()
-            self.model.speed = float(speed)
-            self.model.clone(clone_voice, voice_text)
+            self.model.speed = float(speed)            
             self.model.generate(text, output_file)
         elif (
             "mms-tts" in self.tts_model
