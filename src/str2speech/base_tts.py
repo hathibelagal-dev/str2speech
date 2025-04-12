@@ -9,3 +9,7 @@ class BaseTTS(ABC):
     @abstractmethod
     def generate(self, prompt, output_file):
         pass
+
+    @abstractmethod
+    def clone(self, clone_voice, voice_text):
+        pass

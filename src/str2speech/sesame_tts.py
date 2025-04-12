@@ -4,9 +4,9 @@ import os
 import torchaudio
 import torch
 import sys
+from .base_tts import BaseTTS
 
-
-class SesameTTS:
+class SesameTTS(BaseTTS):
     model_name = "sesame/csm-1b"
 
     def __init__(self):
@@ -27,3 +27,6 @@ class SesameTTS:
         )
         torchaudio.save(output_file, audio.unsqueeze(0).cpu(), self.sample_rate)
         print("Audio saved.")
+
+    def clone(self, clone_voice, voice_text):
+        pass
