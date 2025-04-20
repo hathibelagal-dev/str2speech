@@ -29,7 +29,7 @@ setup(
         "moshi==0.2.4",
         "torchtune",
         "torchao",
-        "huggingface_hub==0.30.0",
+        "huggingface_hub==0.28.1",
         "soxr==0.5.0.post1",
         "einops==0.8.1",
         "einx==0.3.0",
