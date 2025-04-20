@@ -14,7 +14,7 @@ class KokoroTTS(BaseTTS):
     ]
 
     def clone(self, clone_voice, voice_text):
-        print("Cloning voice is not supported in Kokoro TTS.")        
+        pass
 
     def __init__(self, voice_preset: str = "af_heart"):
         super().__init__()        

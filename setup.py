@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 setup(
     name="str2speech",
-    version="0.4.1",
+    version="0.4.2",
     author="Ashraff Hathibelagal",
     description="A powerful, Transformer-based text-to-speech (TTS) tool.",
     long_description=long_description,
@@ -15,7 +15,7 @@ setup(
     package_dir={"": "src"},
     python_requires=">=3.11",
     install_requires=[
-        "transformers>=4.49.0",
+        "transformers==4.50.3",
         "torch",
         "torchvision",
         "torchaudio",
@@ -29,7 +29,7 @@ setup(
         "moshi",
         "torchtune",
         "torchao",
-        "huggingface_hub",
+        "huggingface_hub==0.30.0",
         "soxr==0.5.0.post1",
         "einops==0.8.1",
         "einx==0.3.0",
