@@ -26,7 +26,7 @@ setup(
         "kokoro==0.9.4",
         "soundfile",
         "gitpython",
-        "moshi",
+        "moshi==0.2.4",
         "torchtune",
         "torchao",
         "huggingface_hub==0.30.0",
