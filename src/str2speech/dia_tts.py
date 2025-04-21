@@ -1,5 +1,4 @@
 from .base_tts import BaseTTS
-from .dia.model import Dia
 import torch
 import soundfile as sf
 import numpy as np
@@ -12,6 +11,7 @@ class DiaTTS(BaseTTS):
     def __init__(self):
         super().__init__()
         self.install_dac_and_dependencies()
+        from .dia.model import Dia
         self.model = Dia.from_pretrained(self.model_name, device=self.device)
         self.voice_preset = None
         self.voice_text = None
