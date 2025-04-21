@@ -14,7 +14,7 @@ class BarkTTS(BaseTTS):
             self.model.enable_cpu_offload()
         self.voice_preset = None
 
-    def clone(self, clone_voice):
+    def clone(self, clone_voice, voice_text):
         pass
 
     def generate(self, prompt, output_file):
