@@ -3,16 +3,36 @@ from .dia.model import Dia
 import torch
 import soundfile as sf
 import numpy as np
+from .cloner import Cloner
+
 
 class DiaTTS(BaseTTS):
     model_name = "nari-labs/Dia-1.6B"
 
     def __init__(self):
         super().__init__()
+        self.install_dac_and_dependencies()
         self.model = Dia.from_pretrained(self.model_name, device=self.device)
         self.voice_preset = None
         self.voice_text = None
         self.sample_rate = 44100
+
+    def install_dac_and_dependencies(self):
+        try:
+            import audiotools
+            print("Audiotools found")
+        except:
+            print("Installing audiotools")    
+            url = "https://github.com/hathibelagal-dev/audiotools.git"
+            Cloner.clone_and_install(url, False)
+        
+        try:
+            import dac
+            print("Codec found")
+        except:
+            print("Installing dac")
+            url = "https://github.com/hathibelagal-dev/descript-audio-codec.git"
+            Cloner.clone_and_install(url, False)
 
     def generate(self, prompt, output_file):
         output_audio = self.model.generate(
