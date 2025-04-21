@@ -37,6 +37,9 @@ class Speaker:
         elif "megatts3" in tts_model:
             from .mega3_tts import Mega3TTS
             self.model = Mega3TTS()
+        elif "dia" in tts_model:
+            from .dia_tts import DiaTTS
+            self.model = DiaTTS()
 
     def text_to_speech(self, text: str, output_file: str, voice_preset: str = None, speed: float = 1.0, clone_voice: str = None, voice_text: str = None):
         self.model.clone(clone_voice, voice_text)
