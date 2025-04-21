@@ -81,5 +81,5 @@ class Speaker:
             {"name": "zyphra/zonos-v0.1-transformer"},
             {"name": "sparkaudio/spark-tts-0.5b"},
             {"name": "microsoft/speecht5_tts"},
-            {"name": "nari-labs/Dia-1.6B"}
+            {"name": "nari-labs/dia-1.6b"}
         ]
