@@ -16,6 +16,7 @@ setup(
     python_requires=">=3.11",
     install_requires=[
         "transformers==4.50.3",
+        "protobuf==3.20.3",
         "torch",
         "torchvision",
         "torchaudio",
