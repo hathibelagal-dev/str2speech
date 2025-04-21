@@ -1,5 +1,5 @@
 from .base_tts import BaseTTS
-from dia.model import Dia
+from .dia.model import Dia
 import torch
 import soundfile as sf
 import numpy as np
