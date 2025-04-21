@@ -18,6 +18,9 @@ class DiaTTS(BaseTTS):
         output_audio = self.model.generate(
             text=prompt,
             audio_prompt_path=self.voice_preset,
+            cfg_scale=3.0,
+            temperature=1.3,
+            top_p=0.95,
         )
         if isinstance(output_audio, torch.Tensor):
             output_audio = output_audio.cpu().numpy().squeeze()
