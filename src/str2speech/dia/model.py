@@ -1,4 +1,4 @@
-import dac
+from ..descript import dac
 import numpy as np
 import torch
 import torchaudio

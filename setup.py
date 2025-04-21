@@ -16,7 +16,6 @@ setup(
     python_requires=">=3.11",
     install_requires=[
         "transformers==4.50.3",
-        "protobuf==3.20.3",
         "torch",
         "torchvision",
         "torchaudio",
@@ -43,7 +42,6 @@ setup(
         "x-transformers==2.1.37",
         "openai-whisper==20240930",
         "inflect==7.5.0",
-        "descript-audio-codec==1.0.0"
     ],
     entry_points={
         "console_scripts": [
