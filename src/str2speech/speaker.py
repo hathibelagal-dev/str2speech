@@ -54,6 +54,7 @@ class Speaker:
             or "spark" in self.tts_model
             or "speecht5" in self.tts_model
             or "megatts3" in self.tts_model
+            or "dia" in self.tts_model
         ):
             if voice_preset:
                 print(
@@ -76,5 +77,6 @@ class Speaker:
             {"name": "sesame/csm-1b"},
             {"name": "zyphra/zonos-v0.1-transformer"},
             {"name": "sparkaudio/spark-tts-0.5b"},
-            {"name": "microsoft/speecht5_tts"}
+            {"name": "microsoft/speecht5_tts"},
+            {"name": "nari-labs/Dia-1.6B"}
         ]
