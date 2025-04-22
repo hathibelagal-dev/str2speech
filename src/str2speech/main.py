@@ -8,15 +8,13 @@ import os
 import warnings
 import logging as _L
 
-_L.getLogger('tensorflow').setLevel(logging.ERROR)
-warnings.filterwarnings("ignore")
-logging.set_verbosity_error()
-
-
 def main():
     print(f"Now running str2speech {str2speech.__version__}")
     os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
     os.environ["TF_CUDA_LOGGING"] = "0"
+    _L.getLogger('tensorflow').setLevel(_L.ERROR)
+    warnings.filterwarnings("ignore")
+    logging.set_verbosity_error()
 
     parser = argparse.ArgumentParser(description="A tool to convert text to speech.")
     
