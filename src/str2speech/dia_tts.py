@@ -36,7 +36,7 @@ class DiaTTS(BaseTTS):
 
     def generate(self, prompt, output_file):
         output_audio = self.model.generate(
-            text=prompt,
+            text=prompt if not self.voice_text else self.voice_text + " " + prompt,
             audio_prompt_path=self.voice_preset,
             cfg_scale=3.0,
             temperature=1.3,
