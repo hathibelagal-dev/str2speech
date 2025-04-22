@@ -41,6 +41,8 @@ class DiaTTS(BaseTTS):
             cfg_scale=3.0,
             temperature=1.3,
             top_p=0.95,
+            use_cfg_filter=True,
+            cfg_filter_top_k=30
         )
         if isinstance(output_audio, torch.Tensor):
             output_audio = output_audio.cpu().numpy().squeeze()
