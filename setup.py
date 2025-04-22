@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as f:
 
 setup(
     name="str2speech",
-    version="0.4.2",
+    version="0.4.3",
     author="Ashraff Hathibelagal",
     description="A powerful, Transformer-based text-to-speech (TTS) tool.",
     long_description=long_description,
@@ -41,7 +41,8 @@ setup(
         "pyloudnorm==0.1.1",
         "x-transformers==2.1.37",
         "openai-whisper==20240930",
-        "inflect==7.5.0"
+        "inflect==7.5.0",
+        "argbind"
     ],
     entry_points={
         "console_scripts": [

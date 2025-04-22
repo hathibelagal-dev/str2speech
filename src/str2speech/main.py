@@ -6,14 +6,15 @@ import str2speech.speaker as speaker
 import sys
 import os
 import warnings
-
-warnings.filterwarnings("ignore")
-logging.set_verbosity_error()
-
+import logging as _L
 
 def main():
     print(f"Now running str2speech {str2speech.__version__}")
     os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+    os.environ["TF_CUDA_LOGGING"] = "0"
+    _L.getLogger('tensorflow').setLevel(_L.ERROR)
+    warnings.filterwarnings("ignore")
+    logging.set_verbosity_error()
 
     parser = argparse.ArgumentParser(description="A tool to convert text to speech.")
     
