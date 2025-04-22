@@ -42,8 +42,7 @@ setup(
         "x-transformers==2.1.37",
         "openai-whisper==20240930",
         "inflect==7.5.0",
-        "argbind",
-        "fsspec==2025.3.2"
+        "argbind"
     ],
     entry_points={
         "console_scripts": [
