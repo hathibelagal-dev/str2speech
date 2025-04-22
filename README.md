@@ -105,6 +105,7 @@ The following models are supported:
 - `facebook/mms-tts-fra` (French only)
 - `facebook/mms-tts-spa` (Spanish only)
 - `facebook/mms-tts-swe` (Swedish only)
+- `nari-labs/dia-1.6b` (Experimental)
 
 ## Installation
 
