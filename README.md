@@ -9,7 +9,7 @@
 
 ## Latest
 
-We just added support for Dia-1.6B.
+We just added support for Dia-1.6B and Hindi voices in Kokoro TTS.
 
 ---
 
