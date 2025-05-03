@@ -9,6 +9,10 @@
 
 ## Latest
 
+We just added support for Dia-1.6B and Hindi voices in Kokoro TTS.
+
+---
+
 We just added support for ByteDance's MegaTTS3. Here's how easy it is to use it:
 
 ```
@@ -97,7 +101,7 @@ The following models are supported:
 - `SparkAudio/Spark-TTS-0.5B`
 - `Zyphra/Zonos-v0.1-transformer`
 - `microsoft/speecht5_tts`
-- `Kokoro` (English and Spanish only)
+- `Kokoro` (English, Hindi, and Spanish only)
 - `suno/bark-small` (default TTS model)
 - `suno/bark`
 - `facebook/mms-tts-eng` (English only)
@@ -105,7 +109,7 @@ The following models are supported:
 - `facebook/mms-tts-fra` (French only)
 - `facebook/mms-tts-spa` (Spanish only)
 - `facebook/mms-tts-swe` (Swedish only)
-- `nari-labs/dia-1.6b` (Experimental)
+- `nari-labs/dia-1.6b`
 
 ## Installation
 
