@@ -12,6 +12,9 @@ class KokoroTTS(BaseTTS):
         "bf_alice", "bf_emma", "bf_isabella", "bf_lily",
         "bm_daniel", "bm_fable", "bm_george", "bm_lewis"
     ]
+    hindi_voices = [
+        "hf_alpha", "hm_omega", "hm_psi", "hf_beta"
+    ]
 
     def clone(self, clone_voice, voice_text):
         pass
@@ -33,6 +36,9 @@ class KokoroTTS(BaseTTS):
         elif self.voice_preset in self.british_voices:
             print("Choosing british accent")
             lang_code = "b"
+        elif self.voice_preset in self.hindi_voices:
+            print("Choosing hindi accent")
+            lang_code = "h"
         if lang_code:
             self.pipeline = KPipeline(
                 lang_code=lang_code, repo_id="hexgrad/Kokoro-82M", device=self.device

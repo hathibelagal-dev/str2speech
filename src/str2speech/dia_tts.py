@@ -12,7 +12,7 @@ class DiaTTS(BaseTTS):
         super().__init__()
         self.install_dac_and_dependencies()
         from .dia.model import Dia
-        self.model = Dia.from_pretrained(self.model_name, device=self.device)
+        self.model = Dia.from_pretrained(self.model_name, device=self.device, torch_dtype=torch.float16)
         self.voice_preset = None
         self.voice_text = None
         self.sample_rate = 44100
